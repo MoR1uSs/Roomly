@@ -11,7 +11,6 @@ public class RegisterAction extends ActionSupport {
     private String password;
 
     public String execute() {
-        System.out.println("Register action is called");
         UserDao userDAO = new UserDao();
 
         if(userDAO.getUserByUsername(username) != null) {
