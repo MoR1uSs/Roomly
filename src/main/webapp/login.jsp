@@ -9,12 +9,6 @@
 <body>
     <h2>Inloggen</h2>
 
-    <s:if test="hasActionErrors()">
-        <div style="color: red;">
-            <s:actionerror/>
-        </div>
-    </s:if>
-
     <form action="login" method="post">
         <div>
             <label for="username">Gebruikersnaam:</label>
@@ -29,6 +23,12 @@
         </div>
     </form>
 
-    <p>Nog geen account? <a href="/register.jsp">Registreren</a></p>
+    <p>Nog geen account? <a href="/">Registreren</a></p>
+
+    <s:if test="hasActionErrors()">
+        <div style="color: red;">
+            <s:actionerror/>
+        </div>
+    </s:if>
 </body>
 </html>

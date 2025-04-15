@@ -7,14 +7,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
-
-    private static SessionFactory sessionFactory;
+    private static final SessionFactory sessionFactory;
 
     static {
         try {
             // Загружаем конфигурацию из hibernate.cfg.xml
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
 
+            configuration.addAnnotatedClass(model.User.class);
+            configuration.addAnnotatedClass(model.Workspace.class)
+            ;
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 
