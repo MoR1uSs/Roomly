@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Nieuwe locatie reservering</title>
+  <link rel="stylesheet" href="CSS/Home.css">
+</head>
+<body>
+
+  <h2 class="page-title">Nieuwe locatie reservering</h2>
+
+  <div class="stepbar">
+    <div class="step active">1. Locatie selecteren</div>
+    <div class="step">2. Extra services</div>
+    <div class="step">3. Bevestigen</div>
+  </div>
+
+  <div class="controls">
+    <div class="toolbar">
+      <button id="prev-day">&lt;</button>
+      <button id="next-day">&gt;</button>
+      <span class="date-label">Di 8 apr 2025</span>
+    </div>
+
+    <div class="date-time-select">
+      <input type="date" id="date-input">
+      <input type="time" value="10:00">
+    </div>
+
+    <div class="view-options">
+      <label><input type="radio" name="view" checked> 8 uur</label>
+      <label><input type="radio" name="view"> 24 uur</label>
+      <label><input type="checkbox" checked> 1</label>
+      <label><input type="checkbox"> 5</label>
+      <label><input type="checkbox"> 7 dagen</label>
+    </div>
+  </div>
+
+  <div class="schedule">
+    <div class="rooms">
+      <div class="room-group">A (4)</div>
+      <div class="room">
+        <span class="icon">📍</span>
+        <span class="code">A1.09</span>
+        <span class="desc">vergader ruimte</span>
+        <span class="capacity">8</span>
+      </div>
+      <div class="room">
+        <span class="icon">📍</span>
+        <span class="code">A1.10</span>
+        <span class="desc">vergader ruimte</span>
+        <span class="capacity">10</span>
+      </div>
+
+      <div class="room-group"></div>
+      <div class="room">
+        <span class="icon">📍</span>
+        <span class="code">A1.02</span>
+        <span class="desc">les lokaal</span>
+        <span class="capacity">20+</span>
+      </div>
+      <div class="room">
+        <span class="icon">📍</span>
+        <span class="code">A1.03</span>
+        <span class="desc">Openruimte</span>
+        <span class="capacity">20+</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="hours">
+        <div>08:00</div>
+        <div>09:00</div>
+        <div>10:00</div>
+        <div>11:00</div>
+        <div>12:00</div>
+        <div>13:00</div>
+        <div>14:00</div>
+        <div>15:00</div>
+        <div>16:00</div>
+      </div>
+
+      <div class="time-rows">
+        <div class="time-row"></div>
+        <div class="time-row"></div>
+        <div class="time-row"></div>
+        <div class="time-row"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function formatDateToDutchString(date) {
+      const dagen = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+      const maanden = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+      const dagNaam = dagen[date.getDay()];
+      const dag = date.getDate();
+      const maand = maanden[date.getMonth()];
+      const jaar = date.getFullYear();
+      return `${dagNaam} ${dag} ${maand} ${jaar}`;
+    }
+
+    function updateDateDisplays(date) {
+      const label = document.querySelector('.date-label');
+      const dateInput = document.getElementById('date-input');
+      if (label) {
+        label.textContent = formatDateToDutchString(date);
+      }
+      if (dateInput) {
+        const isoDate = date.toISOString().split('T')[0];
+        dateInput.value = isoDate;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentDate = new Date();
+      updateDateDisplays(currentDate);
+
+      const dateInput = document.getElementById('date-input');
+      const prevBtn = document.getElementById('prev-day');
+      const nextBtn = document.getElementById('next-day');
+
+      dateInput.addEventListener('change', () => {
+        currentDate = new Date(dateInput.value);
+        updateDateDisplays(currentDate);
+      });
+
+      prevBtn.addEventListener('click', () => {
+        currentDate.setDate(currentDate.getDate() - 1);
+        updateDateDisplays(currentDate);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentDate.setDate(currentDate.getDate() + 1);
+        updateDateDisplays(currentDate);
+      });
+    });
+  </script>
+
+</body>
+</html>
