@@ -9,12 +9,6 @@
 <body>
     <h2>Registratie</h2>
 
-    <s:if test="hasActionErrors()">
-        <div style="color: red;">
-            <s:actionerror/>
-        </div>
-    </s:if>
-
     <form action="register" method="post">
         <div>
             <label for="username">Kies een gebruikersnaam:</label>
@@ -22,7 +16,7 @@
         </div>
         <div>
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
+            <input type="email" id="email" name="email">
         </div>
         <div>
             <label for="password">Kies een wachtwoord:</label>
@@ -33,6 +27,12 @@
         </div>
     </form>
 
-    <p>Al een account? <a href="/login">Inloggen</a></p>
+    <p>Al een account? <a href="login">Inloggen</a></p>
+
+    <s:if test="hasActionErrors()">
+        <div style="color: red;">
+            <s:actionerror/>
+        </div>
+    </s:if>
 </body>
 </html>

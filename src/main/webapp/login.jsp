@@ -23,7 +23,7 @@
         </div>
     </form>
 
-    <p>Nog geen account? <a href="/register.jsp">Registreren</a></p>
+    <p>Nog geen account? <a href="/">Registreren</a></p>
 
     <s:if test="hasActionErrors()">
         <div style="color: red;">

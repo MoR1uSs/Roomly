@@ -5,12 +5,12 @@ import dao.UserDao;
 import model.User;
 
 public class LoginAction extends ActionSupport {
-    private String email;
+    private String username;
     private String password;
 
     public String execute() {
         UserDao dao = new UserDao();
-        User user = dao.getUserByEmail(email);
+        User user = dao.getUserByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
             return SUCCESS;
@@ -20,12 +20,12 @@ public class LoginAction extends ActionSupport {
         }
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String username) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

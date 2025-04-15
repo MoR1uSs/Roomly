@@ -1,5 +1,6 @@
 package dao;
 
+import model.Role;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -51,7 +52,7 @@ public class UserDao {
         Session session = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
-            Query<User> query = session.createQuery("FROM User WHERE email = :email", User.class);
+            Query<User> query = session.createQuery("FROM User WHERE email = :email", model.User.class);
             query.setParameter("email", email);
             return query.uniqueResult();
         } catch (Exception e) {
@@ -68,7 +69,7 @@ public class UserDao {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Query<User> query = session.createQuery("FROM User WHERE username = :username", User.class);
+            Query<User> query = session.createQuery("FROM User WHERE username = :username", model.User.class);
             query.setParameter("username", username);
             return query.uniqueResult();
         } catch (Exception e) {
@@ -85,7 +86,7 @@ public class UserDao {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            return session.createQuery("FROM User", User.class).list();
+            return session.createQuery("FROM User", model.User.class).list();
         } catch (Exception e){
             e.printStackTrace();
             return null;
@@ -114,6 +115,14 @@ public class UserDao {
         }
     }
 
+    public Role determineRole(String email){
+         if(email != null && email.toLowerCase().contains("student")) {
+             return Role.STUDENT;
+         } else {
+             return Role.DOCENT;
+         }
+    }
+
     public void deleteUser(int id) {
         Session session = null;
         Transaction transaction = null;
@@ -133,5 +142,13 @@ public class UserDao {
                 session.close();
             }
         }
+    }
+
+    public boolean isDocent(User user){
+        return user.getRole() == Role.DOCENT;
+    }
+
+    public boolean isStudent(User user){
+        return user.getRole() == Role.STUDENT;
     }
 }
