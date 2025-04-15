@@ -6,17 +6,26 @@ import model.User;
 
 public class RegisterAction extends ActionSupport {
     private String username;
+    private String email;
     private String password;
 
     public String execute() {
         System.out.println("Register action is called");
         UserDao userDAO = new UserDao();
-        if (userDAO.getUserByUsername(username) != null) {
+
+        if(userDAO.getUserByUsername(username) != null) {
             addActionError("Gebruikersnaam bestaat al.");
             return ERROR;
         }
+
+        if(userDAO.getUserByEmail(email) != null) {
+            addActionError("E-mailadres bestaat al.");
+            return ERROR;
+        }
+
         User user = new User();
         user.setUsername(username);
+        user.setEmail(email);
         user.setPassword(password);
         userDAO.saveUser(user);
         return SUCCESS;

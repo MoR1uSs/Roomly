@@ -9,8 +9,10 @@ import java.util.List;
 
 public class WorkspacesDao {
     public void saveWorkspace(Workspace workspace) {
+        Session session = null;
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(workspace);
             transaction.commit();
@@ -19,35 +21,57 @@ public class WorkspacesDao {
                 transaction.rollback();
             }
             System.out.println("Error saving workspace: " + e.getMessage());
+        } finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
         }
     }
 
     public Workspace getWorkspaceById(int id){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             return session.get(Workspace.class, id);
         } catch (Exception e){
             System.out.println("Error retrieving workspace: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null && session.isOpen()){
+                session.close();
+            }
         }
     }
 
     public Workspace getWorkspaceByName(String name){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             return session.createQuery("FROM Workspace WHERE name = :name", Workspace.class)
                     .setParameter("name", name)
                     .uniqueResult();
         } catch (Exception e){
             System.out.println("Error retrieving workspace: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null && session.isOpen()){
+                session.close();
+            }
         }
     }
 
     public List<Workspace> getAllWorkspaces(){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             return session.createQuery("FROM Workspace", Workspace.class).list();
         } catch (Exception e){
             System.out.println("Error retrieving workspaces: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null && session.isOpen()){
+                session.close();
+            }
         }
     }
 }

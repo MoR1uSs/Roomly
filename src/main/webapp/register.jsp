@@ -33,6 +33,6 @@
         </div>
     </form>
 
-    <p>Al een account? <a href="<%=request.getContextPath()%>/Reservatiesysteem/loginForm">Inloggen</a></p>
+    <p>Al een account? <a href="/login">Inloggen</a></p>
 </body>
 </html>
