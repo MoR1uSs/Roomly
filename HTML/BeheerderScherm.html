@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="CSS/BeheerderScherm.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="IMG/RoomlyHoofd.png" alt="Dashboard Logo" style="height: 1.5em; vertical-align: middle; margin-right: 10px;" />
+      Dashboard
+    </div>
+    <ul>
+      <li class="active">Dashboard</li>
+      <li>Berichten</li>
+      <li>Activiteit</li>
+      <li>Profiel</li>
+      
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="top-bar">
+      <div class="account-info">
+        <img src="IMG/account icon.png" alt="Account Icon" />
+        <span>Hallo, Gebruiker</span>
+        <div class="dropdown">
+          <button class="dropdown-toggle">▼</button>
+          <div class="dropdown-menu">
+            <a href="Inlog.html">Uitloggen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="box">
+        <h2>Op dit moment (Overzicht van ruimtes)</h2>
+        <div class="dropdown">
+            <button class="dropdown-toggle">Filter ▼</button>
+            <div class="dropdown-menu">
+                <a href="#" onclick="filterRooms('all')">Alle</a>
+                <a href="#" onclick="filterRooms('beschikbaar')">Beschikbaar</a>
+                <a href="#" onclick="filterRooms('bezet')">Bezet</a>
+            </div>
+        </div>
+        <ul id="room-list">
+            <li data-status="beschikbaar">A1.09 - Vergader ruimte (Beschikbaar)</li>
+            <li data-status="bezet">A1.10 - Vergader ruimte (Bezet)</li>
+            <li data-status="beschikbaar">A1.02 - Les lokaal (Beschikbaar)</li>
+            <li data-status="bezet">A1.03 - Open ruimte (Bezet)</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h2>Activiteit</h2>
+        
+      </div>
+    </div>
+  </div>
+  <script>
+    function filterRooms(status) {
+        const rooms = document.querySelectorAll('#room-list li');
+        rooms.forEach(room => {
+            if (status === 'all' || room.dataset.status === status) {
+                room.style.display = 'list-item';
+            } else {
+                room.style.display = 'none';
+            }
+        });
+    }
+  </script>
+</body>
+</html>
