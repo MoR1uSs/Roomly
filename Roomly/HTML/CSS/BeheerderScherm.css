@@ -1,55 +1,139 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+/* Algemene reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.dashboard-container {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f1f1f1;
+  display: flex;
 }
 
-.dashboard-title {
+.sidebar {
+  width: 200px;
+  background-color: #007bff; /* Match login page primary color */
+  color: white;
+  padding: 20px 0;
+  height: 100%;
+}
+
+.sidebar .logo {
+  font-size: 18px;
+  font-weight: bold;
   text-align: center;
-  color: #007bff;
   margin-bottom: 20px;
 }
 
-.dashboard-section {
-  margin-bottom: 30px;
+.sidebar ul {
+  list-style: none;
 }
 
-.dashboard-section h2 {
-  color: #333;
-  margin-bottom: 15px;
+.sidebar ul li {
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
-.reservation-table {
-  width: 100%;
-  border-collapse: collapse;
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background-color: #0056b3; /* Darker shade for hover/active */
 }
 
-.reservation-table th,
-.reservation-table td {
-  border: 1px solid #ddd;
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.account-info img {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+}
+
+.dropdown-filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.dropdown-filter-wrapper select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+#room-list {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+#room-list li {
+  padding: 28px;
+  border: 1px solid #ccc;
+  border-radius: 0; /* Maak vierkant */
+  margin-bottom: 10px;
+  background: #f9f9f9;
+  transition: background 0.3s;
+}
+
+#room-list li:hover {
+  background: #f0f0f0;
+}
+
+#room-list li[data-status="beschikbaar"] {
+  color: rgb(7, 188, 7); /* Groene kleur */
+}
+
+#room-list li[data-status="bezet"] {
+  color: red; /* Rode kleur */
+}
+
+/* Dropdown menu styling */
+.box .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 200px;
+}
+
+.box .dropdown-menu a {
+  display: block;
   padding: 10px;
-  text-align: left;
+  text-decoration: none;
+  color: #0078d4;
+  font-size: 14px;
 }
 
-.reservation-table th {
-  background-color: #007bff;
-  color: white;
+.box .dropdown-menu a:hover {
+  background: #f0f0f0;
 }
 
-.reservation-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.reservation-table tr:hover {
-  background-color: #ddd;
+.box .dropdown:hover .dropdown-menu {
+  display: block;
 }
