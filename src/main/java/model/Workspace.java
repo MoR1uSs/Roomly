@@ -9,7 +9,6 @@ import javax.persistence.Table;
 @Table
 public class Workspace {
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String location;

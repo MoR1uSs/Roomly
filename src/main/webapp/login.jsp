@@ -17,7 +17,7 @@
     </h1>
     <div class="login-box">
     <h2>Inloggen</h2>
-    <form action="login">
+    <form action="login" method="post">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" placeholder="Voer je email in" required />
 

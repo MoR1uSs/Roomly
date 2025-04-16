@@ -1,1 +1,1 @@
-<h1>Welkom</h1>
+<a href="roomList.action">Workspaces list</a>

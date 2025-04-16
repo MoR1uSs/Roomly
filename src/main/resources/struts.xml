@@ -10,7 +10,7 @@
             <result name="error">/login.jsp</result>
         </action>
         
-        <action name="workspaces" class="action.WorkspaceAction">
+        <action name="roomList" class="action.WorkspaceAction">
             <result name="success">/dashboard.jsp</result>
             <result name="error">/error.jsp</result>
         </action>

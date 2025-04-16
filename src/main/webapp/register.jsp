@@ -17,7 +17,7 @@
     </h1>
     <div class="register-box">
     <h2>Registreren</h2>
-      <form action="register">
+      <form action="register" method="post">
         <label for="username">Naam</label>
         <input type="text" id="username" name="username" placeholder="Voer je Naam in" required />
 
