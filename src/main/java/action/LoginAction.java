@@ -8,7 +8,10 @@ public class LoginAction extends ActionSupport {
     private String email;
     private String password;
 
-    public String execute() {
+    public String doLogin() {
+        if (email == null || password == null) {
+            return INPUT;
+        }
         UserDao dao = new UserDao();
         User user = dao.getUserByEmail(email);
 

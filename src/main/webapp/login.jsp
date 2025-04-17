@@ -32,5 +32,10 @@
     </form>
     </div>
   </div>
+  <s:if test="hasActionErrors()">
+    <div style="color: red;">
+      <s:actionerror/>
+    </div>
+  </s:if>
 </body>
 </html>

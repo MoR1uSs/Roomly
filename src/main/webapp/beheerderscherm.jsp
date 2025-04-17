@@ -10,7 +10,7 @@
 <body>
   <div class="sidebar">
     <div class="logo">
-      <img src="../../../../../Roomly/HTML/IMG/RoomlyHoofd.png" alt="Dashboard Logo" style="height: 1.5em; vertical-align: middle; margin-right: 10px;" />
+      <img src="IMG/RoomlyHoofd.png" alt="Dashboard Logo" style="height: 1.5em; vertical-align: middle; margin-right: 10px;" />
       Roomly
     </div>
     <ul>

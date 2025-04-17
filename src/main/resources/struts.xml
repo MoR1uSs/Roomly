@@ -5,12 +5,13 @@
 
 <struts>
     <package name="default" namespace="/" extends="struts-default">
-        <action name="login" class="action.LoginAction">
-            <result name="success">/success.jsp</result>
+        <action name="login" class="action.LoginAction" method="doLogin">
+            <result name="input">/login.jsp</result>
+            <result name="success" type="redirectAction">beheerderscherm</result>
             <result name="error">/login.jsp</result>
         </action>
         
-        <action name="roomList" class="action.WorkspaceAction">
+        <action name="beheerderscherm" class="action.WorkspaceAction">
             <result name="success">/beheerderscherm.jsp</result>
             <result name="error">/error.jsp</result>
         </action>

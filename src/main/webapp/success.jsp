@@ -1,1 +1,0 @@
-<a href="roomList.action">Workspaces list</a>
