@@ -1,6 +1,6 @@
 package dao;
 
-import model.Role;
+import model.enums.Role;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

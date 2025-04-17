@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="nl">
 
 <head>
@@ -27,7 +28,7 @@
       <input type="submit" class="login-button" value="Inloggen" />
 
       <p class="register-link">Nog geen account?<br><a href="/Reservatiesysteem/">Registreer je hier.</a></p>
-      <p class="forgot-link">Wachtwoord vergeten?<br><a href="HTML/WachtwoordVergeten.html">Klik hier.</a></p>
+      <p class="forgot-link">Wachtwoord vergeten?<br><a href="/Reservatiesysteem/wachtwoordvergeten">Klik hier.</a></p>
     </form>
     </div>
   </div>

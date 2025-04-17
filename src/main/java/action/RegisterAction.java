@@ -3,7 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.UserDao;
 import model.User;
-import model.Role;
+import model.enums.Role;
 
 public class RegisterAction extends ActionSupport {
     private String username;
