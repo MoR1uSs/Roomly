@@ -3,26 +3,29 @@ package model;
 import com.google.protobuf.DescriptorProtos;
 
 import javax.naming.spi.ResolveResult;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Reservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userId;
     private int workspaceId;
     private String date;
     private String time;
+    private String description;
 
     public Reservation(){}
 
-    public Reservation(int id, int userId, int workspaceId, String date, String time){
+    public Reservation(int id, int userId, int workspaceId, String date, String time, String description){
         this.id = id;
         this.userId = userId;
         this.workspaceId = workspaceId;
         this.date = date;
         this.time = time;
+        this.description = description;
     }
 
     public String getTime() {
@@ -63,5 +66,13 @@ public class Reservation {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

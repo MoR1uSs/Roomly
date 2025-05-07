@@ -16,6 +16,7 @@ public class HibernateUtil {
 
             configuration.addAnnotatedClass(model.User.class);
             configuration.addAnnotatedClass(model.Workspace.class);
+            configuration.addAnnotatedClass(model.Reservation.class);
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();

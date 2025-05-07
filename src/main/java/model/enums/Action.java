@@ -1,6 +1,9 @@
 package model.enums;
 
 public enum Action {
+    USER_CREATED,
+    USER_UPDATED,
+    USER_DELETED,
     RESERVATION_CREATED,
     RESERVATION_UPDATED,
     RESERVATION_DELETED,

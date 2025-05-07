@@ -2,12 +2,13 @@ package model;
 
 import model.enums.Action;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Management {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int actorId;
     private Action action;
