@@ -11,55 +11,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDao {
-    public void saveReservation(Reservation reservation) {
-        Transaction transaction = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+    private DaoManager<Reservation, Long> daoManager;
 
-            System.out.println("Session open: " + session.isOpen());
-
-            session.save(reservation);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.getStatus().canRollback()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public ReservationDao(){
+        daoManager = new DaoManager<>(Reservation.class);
     }
 
-    public Reservation getReservationById(int id) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            return session.get(Reservation.class, id);
-        } catch (HibernateException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public void save(Reservation reservation) {
+        daoManager.save(reservation);
     }
 
-    public List<Reservation> getAllReservations(){
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            return session.createQuery("FROM User", model.Reservation.class).list();
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public Reservation getById(Long id){
+        return daoManager.findById(id);
+    }
+
+    public void update(Reservation reservation){
+        daoManager.update(reservation);
+    }
+
+    public void delete(Long id){
+        daoManager.deleteById(id);
+    }
+
+    public List<Reservation> findAll(){
+        return daoManager.findAll();
     }
 }

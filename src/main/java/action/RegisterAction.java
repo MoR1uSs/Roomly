@@ -34,7 +34,7 @@ public class RegisterAction extends ActionSupport {
         user.setEmail(email);
         user.setPassword(password);
         user.setRole(role);
-        userDAO.saveUser(user);
+        userDAO.save(user);
         return SUCCESS;
     }
 

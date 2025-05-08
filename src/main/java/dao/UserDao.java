@@ -1,6 +1,9 @@
 package dao;
 
+import com.sun.xml.bind.v2.model.core.ID;
+import model.Management;
 import model.enums.Role;
+import org.apache.logging.log4j.core.appender.db.DbAppenderLoggingException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,41 +14,30 @@ import model.User;
 import java.util.List;
 
 public class UserDao {
-    public void saveUser(User user) {
-        Transaction transaction = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+    private DaoManager<User, Long> daoManager;
 
-            System.out.println("Session open: " + session.isOpen());
-
-            session.save(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.getStatus().canRollback()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public UserDao(){
+        daoManager = new DaoManager<>(User.class);
     }
 
-    public User getUserById(int id) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            return session.get(User.class, id);
-        } catch (HibernateException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public void save(User user){
+        daoManager.save(user);
+    }
+
+    public User getUserById(Long id){
+        return daoManager.findById(id);
+    }
+
+    public void update(User user){
+        daoManager.update(user);
+    }
+
+    public void deleteById(Long id){
+        daoManager.deleteById(id);
+    }
+
+    public List<User> getAllUsers() {
+        return daoManager.findAll();
     }
 
     public User getUserByEmail(String email){
@@ -82,66 +74,12 @@ public class UserDao {
         }
     }
 
-    public List<User> getAllUsers() {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            return session.createQuery("FROM User", model.User.class).list();
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-    }
-
-    public void updateUser(User user) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.update(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-    }
-
     public Role determineRole(String email){
          if(email != null && email.toLowerCase().contains("student")) {
              return Role.STUDENT;
          } else {
              return Role.DOCENT;
          }
-    }
-
-    public void deleteUser(int id) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            User user = session.get(User.class, id);
-            if (user != null) {
-                session.delete(user);
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
     }
 
     public boolean isDocent(User user){

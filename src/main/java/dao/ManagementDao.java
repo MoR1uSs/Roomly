@@ -2,35 +2,38 @@ package dao;
 
 import antlr.preprocessor.Hierarchy;
 import model.Management;
+import org.apache.logging.log4j.core.appender.db.DbAppenderLoggingException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class ManagementDao {
-    public void saveLog(Management log){
-        Transaction transaction = null;
-        Session session = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+    private DaoManager<Management, Long> daoManager;
 
-            session.save(log);
-            transaction.commit();
-        } catch (Exception e){
-            if (transaction != null && transaction.getStatus().canRollback()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public ManagementDao(){
+        daoManager = new DaoManager<>(Management.class);
     }
 
-    public void getLogById(){
-        //TODO
+    public void save(Management management){
+        daoManager.save(management);
+    }
+
+    public void update(Management management){
+        daoManager.update(management);
+    }
+
+    public Management findById(Long id){
+        return daoManager.findById(id);
+    }
+
+    public void deleteById(Long id){
+        daoManager.deleteById(id);
+    }
+
+    public List<Management> findAll(){
+        return daoManager.findAll();
     }
 }

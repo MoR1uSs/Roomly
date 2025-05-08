@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Management {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int actorId;
     private Action action;
     private String timestamp;
@@ -17,7 +17,7 @@ public class Management {
     public Management() {
     }
 
-    public Management(int id, int actorId, Action action, String timestamp) {
+    public Management(Long id, int actorId, Action action, String timestamp) {
         this.id = id;
         this.actorId = actorId;
         this.action = action;
@@ -48,11 +48,11 @@ public class Management {
         this.actorId = actorId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

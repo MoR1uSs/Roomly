@@ -30,7 +30,7 @@ public class CreateResevationAction {
             reservation.setDescription(description);
         }
 
-        reservationDao.saveReservation(reservation);
+        reservationDao.save(reservation);
         return SUCCESS;
     }
 

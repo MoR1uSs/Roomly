@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int userId;
     private int workspaceId;
     private String date;
@@ -19,7 +19,7 @@ public class Reservation {
 
     public Reservation(){}
 
-    public Reservation(int id, int userId, int workspaceId, String date, String time, String description){
+    public Reservation(Long id, int userId, int workspaceId, String date, String time, String description){
         this.id = id;
         this.userId = userId;
         this.workspaceId = workspaceId;
@@ -60,11 +60,11 @@ public class Reservation {
         this.userId = userId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
