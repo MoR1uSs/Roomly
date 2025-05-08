@@ -1,6 +1,6 @@
 package action;
 
-import dao.WorkspacesDao;
+import dao.WorkspaceDao;
 import model.Workspace;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public class WorkspaceAction {
     private List<Workspace> workspaces;
 
     public String execute() {
-        WorkspacesDao workspacesDao = new WorkspacesDao();
+        WorkspaceDao workspacesDao = new WorkspaceDao();
         workspaces = workspacesDao.getAllWorkspaces();
         return SUCCESS;
     }

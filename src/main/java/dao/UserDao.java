@@ -1,5 +1,10 @@
 package dao;
 
+import com.sun.xml.bind.v2.model.core.ID;
+import model.Management;
+import model.enums.Role;
+import org.apache.logging.log4j.core.appender.db.DbAppenderLoggingException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -9,62 +14,79 @@ import model.User;
 import java.util.List;
 
 public class UserDao {
-    public void saveUser(User user) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
+    private DaoManager<User, Long> daoManager;
+
+    public UserDao(){
+        daoManager = new DaoManager<>(User.class);
     }
 
-    public User getUserById(int id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(User.class, id);
+    public void save(User user){
+        daoManager.save(user);
+    }
+
+    public User getUserById(Long id){
+        return daoManager.findById(id);
+    }
+
+    public void update(User user){
+        daoManager.update(user);
+    }
+
+    public void deleteById(Long id){
+        daoManager.deleteById(id);
+    }
+
+    public List<User> getAllUsers() {
+        return daoManager.findAll();
+    }
+
+    public User getUserByEmail(String email){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<User> query = session.createQuery("FROM User WHERE email = :email", model.User.class);
+            query.setParameter("email", email);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
     public User getUserByUsername(String username) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<User> query = session.createQuery("FROM User WHERE username = :username", User.class);
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<User> query = session.createQuery("FROM User WHERE username = :username", model.User.class);
             query.setParameter("username", username);
             return query.uniqueResult();
-        }
-    }
-
-    public List<User> getAllUsers() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM User", User.class).list();
-        }
-    }
-
-    public void updateUser(User user) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.update(user);
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        }
-    }
-
-    public void deleteUser(int id) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            User user = session.get(User.class, id);
-            if (user != null) {
-                session.delete(user);
+            return null;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
             }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
         }
+    }
+
+    public Role determineRole(String email){
+         if(email != null && email.toLowerCase().contains("student")) {
+             return Role.STUDENT;
+         } else {
+             return Role.DOCENT;
+         }
+    }
+
+    public boolean isDocent(User user){
+        return user.getRole() == Role.DOCENT;
+    }
+
+    public boolean isStudent(User user){
+        return user.getRole() == Role.STUDENT;
     }
 }
