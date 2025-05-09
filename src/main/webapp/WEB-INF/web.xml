@@ -19,11 +19,10 @@
 
     <!-- Welcome File List -->
     <welcome-file-list>
-        <welcome-file>register.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
-    <!-- Session Configuration
     <session-config>
         <session-timeout>30</session-timeout>
-    </session-config>       -->
+    </session-config>
 </web-app>
