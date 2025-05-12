@@ -20,5 +20,10 @@
             <result name="success">/login.jsp</result>
             <result name="error">/register.jsp</result>
         </action>
+
+        <action name="reservation-form" class="action.DropdownAction">
+            <result name="success">/reservering.jsp</result>
+            <result name="success">/error.jsp</result>
+        </action>
     </package>
 </struts>
