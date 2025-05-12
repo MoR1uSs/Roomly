@@ -11,15 +11,15 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int userId;
-    private int workspaceId;
+    private Long userId;
+    private Long workspaceId;
     private String date;
     private String time;
     private String description;
 
     public Reservation(){}
 
-    public Reservation(Long id, int userId, int workspaceId, String date, String time, String description){
+    public Reservation(Long id, Long userId, Long workspaceId, String date, String time, String description){
         this.id = id;
         this.userId = userId;
         this.workspaceId = workspaceId;
@@ -44,19 +44,19 @@ public class Reservation {
         this.date = date;
     }
 
-    public int getWorkspaceId() {
+    public Long getWorkspaceId() {
         return workspaceId;
     }
 
-    public void setWorkspaceId(int workspaceId) {
+    public void setWorkspaceId(Long workspaceId) {
         this.workspaceId = workspaceId;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

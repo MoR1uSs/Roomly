@@ -19,8 +19,11 @@
     <div class="register-box">
     <h2>Registreren</h2>
       <form action="register" method="post">
-        <label for="username">Naam</label>
-        <input type="text" id="username" name="username" placeholder="Voer je Naam in" required />
+        <label for="name">Voornaam</label>
+        <input type="text" id="name" name="name" placeholder="Voer je voornaam in" required />
+
+        <label for="surname">Achternaam</label>
+        <input type="text" id="surname" name="surname" placeholder="Voer je achternaam in" required />
 
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Voer je Email in" required />

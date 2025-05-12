@@ -3,10 +3,14 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.UserDao;
 import model.User;
+import org.apache.struts2.interceptor.SessionAware;
 
-public class LoginAction extends ActionSupport {
+import java.util.Map;
+
+public class LoginAction extends ActionSupport implements SessionAware {
     private String email;
     private String password;
+    private Map<String, Object> session;
 
     public String doLogin() {
         if (email == null || password == null) {
@@ -16,6 +20,9 @@ public class LoginAction extends ActionSupport {
         User user = dao.getUserByEmail(email);
 
         if (user != null && user.getPassword().equals(password)) {
+            session.put("userId", user.getId());
+            session.put("userEmail", email);
+            session.put("userRole", user.getRole());
             return SUCCESS;
         } else {
             addActionError("Verkeerde gebruikersnaam of wachtwoord.");
@@ -37,5 +44,10 @@ public class LoginAction extends ActionSupport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 }

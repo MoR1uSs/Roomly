@@ -220,9 +220,8 @@ body {
 }
 
 #room-list li {
-  padding: 28px;
+  padding: 15px;
   border: 1px solid #ccc;
-  border-radius: 0px; /* Maak vierkant */
   margin-bottom: 10px;
   background: #f9f9f9;
   transition: background 0.3s;

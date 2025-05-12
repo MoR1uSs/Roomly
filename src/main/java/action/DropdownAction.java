@@ -1,13 +1,15 @@
 package action;
 
+import com.opensymphony.xwork2.ActionSupport;
 import dao.WorkspaceDao;
 import model.Workspace;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
-public class DropdownAction {
+public class DropdownAction extends ActionSupport {
     private List<Workspace> workspaces;
     private Long selectedWorkspaceId;
 
@@ -18,6 +20,7 @@ public class DropdownAction {
     }
 
     public List<Workspace> getWorkspaces(){
+        System.out.println("Returning workspaces: " + (workspaces == null ? "null" : workspaces.size()));
         return workspaces;
     }
 

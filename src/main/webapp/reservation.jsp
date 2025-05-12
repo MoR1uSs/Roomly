@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Kamer reserveren</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="CSS/Reservation.css">
 </head>
 
 <body>
@@ -14,22 +14,22 @@
 
     <div class="form-layout">
       <div class="left-panel">
-        <s:form action="reservation-form">
-            <s:select
-                label="Locatie"
-                name="selectedCategoryId"
-                list="workspaces"
-                listKey="id"
-                listValue="name"
-                headerKey=""
-                headerValue="-- Maak een keuze --" />
-            <s:submit value="Submit"/>
-        </s:form>
-        <h3>Extra informatie</h3>
-        <form>
-          <label>Korte omschrijving <input type="text" required></label>
-          <button type="submit" disabled>Reservering bevestigen</button>
-        </form>
+            <s:form action="create-reservation" method="post" theme="simple">
+                <label>Locatie:</label>
+                <s:select
+                    id="workspace"
+                    name="selectedWorkspaceId"
+                    list="workspaces"
+                    listKey="id"
+                    listValue="name"
+                    headerKey=""
+                    cssClass="workspaces"
+                    headerValue="-- Maak een keuze --" />
+                <label>Date: <input type="date" name="date" required></label>
+                <label>Tijd: <input type="time" name="time" required></label>
+                <label>Omschrijving <input type="text" required></label>
+                <s:submit value="Reserveren" cssClass="submit-button"/>
+            </s:form>
       </div>
 
       <div class="right-panel">
@@ -38,9 +38,9 @@
           <div class="room-card">
             <span class="icon">📍</span>
             <div>
-              <strong>106</strong><br>
+              <strong>000</strong><br>
               <br>
-              Projectgroep ruimte
+              test
             </div>
           </div>
         </div>
@@ -48,4 +48,5 @@
     </div>
   </div>
 </body>
+
 </html>

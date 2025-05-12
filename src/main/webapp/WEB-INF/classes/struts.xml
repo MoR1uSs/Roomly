@@ -7,7 +7,7 @@
     <package name="default" namespace="/" extends="struts-default">
         <action name="login" class="action.LoginAction" method="doLogin">
             <result name="input">/login.jsp</result>
-            <result name="success" type="redirectAction">beheerderscherm</result>
+            <result name="success" type="redirectAction">reservation-form</result>
             <result name="error">/login.jsp</result>
         </action>
         
@@ -21,9 +21,16 @@
             <result name="error">/register.jsp</result>
         </action>
 
+        <!-- 1) To load the form -->
         <action name="reservation-form" class="action.DropdownAction">
-            <result name="success">/reservering.jsp</result>
-            <result name="success">/error.jsp</result>
+            <result name="success">/reservation.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <!-- 2) To handle the submission -->
+        <action name="create-reservation" class="action.CreateResevationAction">
+            <result name="input">/reservation.jsp</result>
+            <result name="error">/error.jsp</result>
         </action>
     </package>
 </struts>

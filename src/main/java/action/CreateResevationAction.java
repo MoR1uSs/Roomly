@@ -1,14 +1,20 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 import com.sun.net.httpserver.Authenticator;
 import dao.ReservationDao;
+import dao.WorkspaceDao;
 import model.Reservation;
+import model.Workspace;
+
+import java.util.Map;
 
 import static com.opensymphony.xwork2.Action.*;
 
-public class CreateResevationAction {
-    private int userId;
-    private int workspaceId;
+public class CreateResevationAction extends ActionSupport {
+    private Long userId;
+    private Long selectedWorkspaceId;
     private String date;
     private String time;
     private String description;
@@ -18,11 +24,23 @@ public class CreateResevationAction {
             return INPUT;
         }
 
+        WorkspaceDao workspaceDao = new WorkspaceDao();
+        Workspace ws = workspaceDao.getById(selectedWorkspaceId);
+
+        if(ws == null){
+            addActionError("Ongelide locatie");
+            return INPUT;
+        }
+
+        Map<String, Object> session = ActionContext.getContext().getSession();
+
         ReservationDao reservationDao = new ReservationDao();
         Reservation reservation = new Reservation();
 
-        reservation.setUserId(userId);
-        reservation.setWorkspaceId(workspaceId);
+        Object id = session.get("userId");
+
+        reservation.setUserId((Long) id);
+        reservation.setWorkspaceId(selectedWorkspaceId);
         reservation.setDate(date);
         reservation.setTime(time);
 
@@ -34,20 +52,20 @@ public class CreateResevationAction {
         return SUCCESS;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public int getWorkspaceId() {
-        return workspaceId;
+    public Long getSelectedWorkspaceId() {
+        return selectedWorkspaceId;
     }
 
-    public void setWorkspaceId(int workspaceId) {
-        this.workspaceId = workspaceId;
+    public void setSelectedWorkspaceId(Long selectedWorkspaceId) {
+        this.selectedWorkspaceId = selectedWorkspaceId;
     }
 
     public String getDate() {
