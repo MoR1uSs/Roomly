@@ -26,8 +26,10 @@
                     cssClass="workspaces"
                     headerValue="-- Maak een keuze --" />
                 <label>Date: <input type="date" name="date" required></label>
-                <label>Tijd: <input type="time" name="time" required></label>
-                <label>Omschrijving <input type="text" required></label>
+                <label>Begintijd: <input type="time" name="beginTime" required></label>
+                <label>Eindtijd: <input type="time" name="endTime" required></label>
+                <label for="description">Omschrijving:</label>
+                <s:textfield id="description" name="description"/>
                 <s:submit value="Reserveren" cssClass="submit-button"/>
             </s:form>
       </div>

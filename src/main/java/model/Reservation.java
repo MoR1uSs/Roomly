@@ -4,6 +4,8 @@ import com.google.protobuf.DescriptorProtos;
 
 import javax.naming.spi.ResolveResult;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table
@@ -13,35 +15,45 @@ public class Reservation {
     private Long id;
     private Long userId;
     private Long workspaceId;
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime beginTime;
+    private LocalTime endTime;
     private String description;
 
     public Reservation(){}
 
-    public Reservation(Long id, Long userId, Long workspaceId, String date, String time, String description){
+    public Reservation(Long id, Long userId, Long workspaceId, LocalDate date, String description, LocalTime beginTime, LocalTime endTime){
         this.id = id;
         this.userId = userId;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
         this.workspaceId = workspaceId;
         this.date = date;
-        this.time = time;
         this.description = description;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalTime getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(LocalTime beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public Long getWorkspaceId() {

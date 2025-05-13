@@ -7,7 +7,12 @@ import dao.ReservationDao;
 import dao.WorkspaceDao;
 import model.Reservation;
 import model.Workspace;
+import net.bytebuddy.asm.Advice;
+import org.apache.struts2.components.InputTransferSelect;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 import static com.opensymphony.xwork2.Action.*;
@@ -16,19 +21,30 @@ public class CreateResevationAction extends ActionSupport {
     private Long userId;
     private Long selectedWorkspaceId;
     private String date;
-    private String time;
+    private String beginTime;
+    private String endTime;
     private String description;
 
     public String execute(){
-        if(date == null || time == null){
+        if(date == null || beginTime == null || endTime == null){
             return INPUT;
         }
 
-        WorkspaceDao workspaceDao = new WorkspaceDao();
-        Workspace ws = workspaceDao.getById(selectedWorkspaceId);
+        LocalDate parsedDate;
+        LocalTime parsedBeginTime;
+        LocalTime parsedEndTime;
 
-        if(ws == null){
-            addActionError("Ongelide locatie");
+        try{
+            parsedDate = LocalDate.parse(date);
+            parsedBeginTime = LocalTime.parse(beginTime);
+            parsedEndTime = LocalTime.parse(endTime);
+        } catch (Exception e){
+            addActionError("Ongeldig datum of tijd formaat.");
+            return INPUT;
+        }
+
+        if(!parsedBeginTime.isBefore(parsedEndTime)){
+            addActionError("Ongeldig tijd");
             return INPUT;
         }
 
@@ -41,8 +57,20 @@ public class CreateResevationAction extends ActionSupport {
 
         reservation.setUserId((Long) id);
         reservation.setWorkspaceId(selectedWorkspaceId);
-        reservation.setDate(date);
-        reservation.setTime(time);
+        reservation.setDate(parsedDate);
+        reservation.setBeginTime(parsedBeginTime);
+        reservation.setEndTime(parsedEndTime);
+
+        List<Reservation> reservationList = reservationDao.findAll();
+
+        for (Reservation res : reservationList) {
+            if (res.getWorkspaceId().equals(selectedWorkspaceId) && res.getDate().isEqual(parsedDate)) {
+                if (!(parsedEndTime.isBefore(res.getBeginTime()) || parsedBeginTime.isAfter(res.getEndTime()))) {
+                    addActionError("De werkruimte is al gereserveerd voor de geselecteerde tijd.");
+                    return INPUT;
+                }
+            }
+        }
 
         if(description != null){
             reservation.setDescription(description);
@@ -76,12 +104,20 @@ public class CreateResevationAction extends ActionSupport {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
+    public String getBeginTime() {
+        return beginTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getDescription() {
