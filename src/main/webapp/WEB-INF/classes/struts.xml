@@ -5,6 +5,9 @@
 
 <struts>
     <package name="default" namespace="/" extends="struts-default">
+        <!-- <interceptors>
+            TODO
+        </interceptors> -->
         <action name="login" class="action.LoginAction" method="doLogin">
             <result name="input">/login.jsp</result>
             <result name="success" type="redirectAction">reservation-form</result>

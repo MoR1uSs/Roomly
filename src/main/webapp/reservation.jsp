@@ -36,13 +36,9 @@
 
       <div class="right-panel">
         <div class="booking-summary">
-          <p><strong>08 april 2025</strong> 11:15 - 12:15</p>
-          <div class="room-card">
-            <span class="icon">📍</span>
+          <div class="room-card"
             <div>
-              <strong>000</strong><br>
-              <br>
-              test
+             <p><strong>08 april 2025</strong> 11:15 - 12:15</p>
             </div>
           </div>
         </div>
