@@ -2,22 +2,15 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.net.httpserver.Authenticator;
 import dao.ReservationDao;
-import dao.WorkspaceDao;
 import model.Reservation;
-import model.Workspace;
-import net.bytebuddy.asm.Advice;
-import org.apache.struts2.components.InputTransferSelect;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
-import static com.opensymphony.xwork2.Action.*;
-
-public class CreateResevationAction extends ActionSupport {
+public class CreateReservationAction extends ActionSupport {
     private Long userId;
     private Long selectedWorkspaceId;
     private String date;

@@ -3,7 +3,6 @@ package interceptor;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
-import org.hibernate.Session;
 
 import java.util.Map;
 

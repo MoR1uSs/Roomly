@@ -39,7 +39,6 @@
                    Capacity: <s:property value="capacity"/><br/>
                    Facilities: <s:property value="facilities"/><br/>
                    Location: <s:property value="location"/><br/>
-                   Status: <s:property value="status"/>
                  </li>
                </div>
              </s:iterator>

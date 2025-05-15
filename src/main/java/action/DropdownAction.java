@@ -4,10 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import dao.WorkspaceDao;
 import model.Workspace;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class DropdownAction extends ActionSupport {
     private List<Workspace> workspaces;
