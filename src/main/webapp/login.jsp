@@ -20,15 +20,14 @@
     <h2>Inloggen</h2>
     <form action="login" method="post">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Voer je email in" required />
+      <input type="email" id="email" name="email" placeholder="@scalda.nl" required />
 
       <label for="password">Wachtwoord</label>
-      <input type="password" id="password" name="password" placeholder="Voer je wachtwoord in" required />
+      <input type="password" id="password" name="password" placeholder="..." required />
 
       <input type="submit" class="login-button" value="Inloggen" />
 
       <p class="register-link">Nog geen account?<br><a href="/Reservatiesysteem/">Registreer je hier.</a></p>
-      <p class="forgot-link">Wachtwoord vergeten?<br><a href="/Reservatiesysteem/wachtwoordvergeten">Klik hier.</a></p>
     </form>
     </div>
   </div>

@@ -131,3 +131,9 @@ body {
     font-weight: bold;
     text-decoration: none;
 }
+
+.name {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}

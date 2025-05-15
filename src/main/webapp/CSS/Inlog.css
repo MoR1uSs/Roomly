@@ -62,18 +62,16 @@ body {
 }
 
 .login-button:hover {
-  background-color: #0056b3;
+  background-color: #000000;
 }
 
-.register-link,
-.forgot-link {
+.register-link {
   margin-top: 15px;
   font-size: 14px;
   color: #000;
 }
 
-.register-link a,
-.forgot-link a {
+.register-link a {
   color: blue;
   font-weight: bold;
   text-decoration: none;

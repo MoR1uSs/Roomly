@@ -13,8 +13,9 @@
             <result name="success" type="redirectAction">beheerderscherm</result>
             <result name="error">/login.jsp</result>
         </action>
-        
+
         <action name="beheerderscherm" class="action.WorkspaceLoadAction">
+            <interceptor-ref name="authentication"/>
             <result name="success">/beheerderscherm.jsp</result>
             <result name="error">/error.jsp</result>
         </action>

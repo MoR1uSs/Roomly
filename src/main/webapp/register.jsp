@@ -19,17 +19,17 @@
     <div class="register-box">
     <h2>Registreren</h2>
       <form action="register" method="post">
-        <label for="name">Voornaam</label>
-        <input type="text" id="name" name="name" placeholder="Voer je voornaam in" required />
-
-        <label for="surname">Achternaam</label>
-        <input type="text" id="surname" name="surname" placeholder="Voer je achternaam in" required />
+        <label for="name">Naam</label>
+        <div class="name">
+        <input type="text" id="name" name="name" placeholder="Voornaam" required />
+        <input type="text" id="surname" name="surname" placeholder="Achternaam" required />
+        </div>
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Voer je Email in" required />
+        <input type="email" id="email" name="email" placeholder="@scalda.nl" required />
 
         <label for="password">Wachtwoord</label>
-        <input type="password" id="password" name="password" placeholder="Voer je Wachtwoord in" required />
+        <input type="password" id="password" name="password" placeholder="..." required />
 
         <input type="submit" class="register-button" value="Registreren" />
         <p class="login-link">Heb je al een account?<br><a href="login">Log hier in.</a></p>
