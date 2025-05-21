@@ -15,8 +15,7 @@
         </action>
 
         <action name="beheerderscherm" class="action.WorkspaceLoadAction">
-            <interceptor-ref name="authentication"/>
-            <result name="success">/beheerderscherm.jsp</result>
+            <result name="success">/lokalen.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
 

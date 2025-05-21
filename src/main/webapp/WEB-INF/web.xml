@@ -19,7 +19,7 @@
 
     <!-- Welcome File List -->
     <welcome-file-list>
-        <welcome-file>register.jsp</welcome-file>
+        <welcome-file>beheerderscherm</welcome-file>
     </welcome-file-list>
 
     <session-config>
