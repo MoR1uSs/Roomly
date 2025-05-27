@@ -15,8 +15,11 @@
         </action>
 
         <action name="beheerderscherm" class="action.WorkspaceLoadAction">
+            <interceptor-ref name="authentication"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/lokalen.jsp</result>
             <result name="error">/error.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
 
         <action name="register" class="action.RegisterAction">
@@ -41,6 +44,11 @@
 
         <action name="logout" class="action.LogoutAction">
             <result name="success">/login.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="load-reservations" class="action.ReservationsLoadAction">
+            <result name="success">/dashboard.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
     </package>

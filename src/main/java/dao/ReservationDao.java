@@ -56,4 +56,21 @@ public class ReservationDao {
             }
         }
     }
+
+    public List<Reservation> getReservationsByUserId(Long id){
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<Reservation> query = session.createQuery("FROM Reservation WHERE userId = :id", model.Reservation.class);
+            query.setParameter("id", id);
+            return query.list();
+        } catch (Exception e){
+            e.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+    }
 }
