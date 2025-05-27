@@ -10,11 +10,11 @@
         </interceptors>
         <action name="login" class="action.LoginAction" method="doLogin">
             <result name="input">/login.jsp</result>
-            <result name="success" type="redirectAction">beheerderscherm</result>
+            <result name="success" type="redirectAction">lokalen</result>
             <result name="error">/login.jsp</result>
         </action>
 
-        <action name="beheerderscherm" class="action.WorkspaceLoadAction">
+        <action name="lokalen" class="action.WorkspaceLoadAction">
             <interceptor-ref name="authentication"/>
             <interceptor-ref name="defaultStack"/>
             <result name="success">/lokalen.jsp</result>
@@ -50,6 +50,9 @@
         <action name="load-reservations" class="action.ReservationsLoadAction">
             <result name="success">/dashboard.jsp</result>
             <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="search-workspaces" class="action.WorkspaceSearchAction">
         </action>
     </package>
 </struts>

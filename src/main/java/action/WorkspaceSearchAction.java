@@ -6,21 +6,30 @@ import model.Workspace;
 
 import java.util.List;
 
-public class WorkspaceLoadAction extends ActionSupport {
+public class WorkspaceSearchAction extends ActionSupport {
     private List<Workspace> workspaces;
+    private String term;
 
     public String execute() {
-        WorkspaceDao workspacesDao = new WorkspaceDao();
-        workspaces = workspacesDao.getAllWorkspaces();
+        WorkspaceDao workspaceDao = new WorkspaceDao();
+        workspaces = workspaceDao.searchWorkspacesByName(term);
 
         return SUCCESS;
     }
 
-    public List<Workspace> getWorkspaces(){
+    public List<Workspace> getWorkspaces() {
         return workspaces;
     }
 
     public void setWorkspaces(List<Workspace> workspaces) {
         this.workspaces = workspaces;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
     }
 }

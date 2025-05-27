@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ReservationsLoadAction extends ActionSupport {
-    List<Reservation> reservations;
+    private List<Reservation> reservations;
 
     public String execute() {
         ReservationDao reservationDao = new ReservationDao();
         Map<String, Object> session = ActionContext.getContext().getSession();
 
+        System.out.println((Long)session.get("userId"));
         reservations = reservationDao.getReservationsByUserId((Long)session.get("userId"));
         return SUCCESS;
     }
