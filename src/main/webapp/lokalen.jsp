@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="variables.css">
 </head>
 <body>
   <div class="container">
@@ -24,7 +25,9 @@
       <div class="info">
       <p>Lokalen</p>
       </div>
-      <button>Uitloggen</button>
+      <form action="logout">
+        <button id="logout-but">Uitloggen</button>
+      </form>
     </div>
     <div class="main">
       <div class="filter">
@@ -58,23 +61,12 @@
      let elements = document.querySelectorAll(".status");
 
      elements.forEach(el => {
+       el.style.fontWeight = "800";
+       el.style.opacity = 1;
         if(el.innerHTML == "Vrij"){
-          el.style.width = "25px";
-          el.style.height= "20px";
-          el.style.color = "black";
-          el.style.padding = "5px";
-          el.style.backgroundColor = "#78d68096";
-          el.style.border = "2px green solid";
-          el.style.borderRadius = "4px";
+          el.style.color = "rgba(24,202,43,0.66)";
         } else {
-
-          el.style.width = "40px";
-          el.style.height= "20px";
-          el.style.color = "black";
-          el.style.padding = "5px";
-          el.style.backgroundColor = "#e6898996";
-          el.style.border = "2px red solid";
-          el.style.borderRadius = "4px";
+          el.style.color = "rgba(255,15,15,0.76)";
         }
      });
   </script>

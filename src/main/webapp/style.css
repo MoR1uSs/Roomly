@@ -5,10 +5,10 @@
 }
 
 .body{
-    background-color: #fffffe;
+    background-color: var(--background-color);
 }
 .roomly{
-    color: #094067;
+    color: var(--logo-color);
 }
 
 .container {
@@ -44,8 +44,28 @@
 
 .filter input{
     width: 200px;
+}
+
+#logout-but{
+    transition: background-color 0.3s ease;
+    background-color: var(--button-color);
+    color: white;
+    padding: 9px 13px 9px 13px;
     border-radius: 5px;
-    border-color: rgba(76, 88, 95, 0.808);
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#logout-but:hover{
+    background-color: var(--button-transition-button);
+}
+
+#search {
+    font-size: 13px;
+    opacity: 0.7;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
     padding: 3px;
 }
 
@@ -67,26 +87,20 @@
     padding-left: 15px;
 }
 
-.profile button {
-    background-color: #3da9fc;
-    color: white;
-    padding: 9px 13px 9px 13px;
-    border-radius: 5px;
-    border: 0;
-    font-weight: 600;
-    cursor: pointer;
-}
-
 .reserve-button {
-    background-color: #3da9fc;
+    background-color: var(--button-color);
     color: white;
     padding: 9px 13px 9px 13px;
     border-radius: 5px;
     border: 0;
     font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.reserve-button:hover{
+    background-color: var(--button-transition-button);
+}
 .main {
     padding: 2rem 4rem 1rem 4rem;
 }
