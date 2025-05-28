@@ -5,8 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
+    background: var(--background-color);
     margin-top: 1rem;
   }
 
@@ -15,7 +14,8 @@ body {
     margin: 0 auto;
     padding: 20px;
     background: white;
-    border: rgb(0, 0, 0) solid 2px;
+    border: rgb(157, 175, 188) solid 3px;
+    border-radius: 5px;
   }
 
   .stepbar {
@@ -79,14 +79,14 @@ body {
     margin-top: 15px;
   }
 
-  form button {
+  .submit-button {
     margin-top: 20px;
     padding: 10px 15px;
     background: #0078d4;
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: not-allowed;
+    cursor: pointer;
   }
 
   .booking-summary {

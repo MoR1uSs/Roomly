@@ -2,7 +2,8 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="nl">
 <head>
-    <title>Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="variables.css" rel="stylesheet">
@@ -48,6 +49,13 @@
                         <p><s:property value="getWorkspaceNames(workspaceId)"/></p>
                         <p><s:property value="beginTime +' - '+ endTime"/> </p>
                         <p><s:property value="description"/></p>
+                        <div class="d-u-buttons">
+                            <button class="update">Bewerken</button>
+                            <form action="delete-action">
+                                <input type="hidden" name="id" value="<s:property value='id'/>" />
+                                <button class="delete" type="submit">Verwijderen</button>
+                            </form>
+                        </div>
                     </div>
                 </s:iterator>
             </div>

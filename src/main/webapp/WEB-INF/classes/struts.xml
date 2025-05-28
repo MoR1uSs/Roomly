@@ -29,8 +29,6 @@
 
         <!-- To load -->
         <action name="reservation-form" class="action.DropdownAction">
-            <interceptor-ref name="authentication"/>
-            <interceptor-ref name="defaultStack"/>
             <result name="success">/reservation.jsp</result>
             <result name="error">/error.jsp</result>
             <result name="login">/login.jsp</result>
@@ -38,6 +36,7 @@
 
         <!-- To handle  -->
         <action name="create-reservation" class="action.CreateReservationAction">
+            <result name="success">load-reservations</result>
             <result name="input">/reservation.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
@@ -52,7 +51,9 @@
             <result name="error">/error.jsp</result>
         </action>
 
-        <action name="search-workspaces" class="action.WorkspaceSearchAction">
+        <action name="delete-action" class="action.DeleteReservationAction">
+            <result name="success">/load-reservations.action</result>
+            <result name="error">/error.jsp</result>
         </action>
     </package>
 </struts>

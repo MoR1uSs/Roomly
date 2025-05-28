@@ -47,6 +47,7 @@
         </select>
         <input name="term" type="text" id="search" placeholder="Typ hier..." />
       </div>
+      <div class="new-form"></div>
       <div class="items">
         <p>Naam</p>
         <p>Capaciteit</p>
@@ -83,6 +84,14 @@
             el.style.color = "rgba(255,15,15,0.76)";
           }
        });
+
+       function openReservationForm(){
+         document.querySelector(".new-form").style.display = "block";
+       }
+
+       function closeReservationForm(){
+         document.querySelector(".new-form").style.display = "none";
+       }
     </script>
   </div>
 </body>

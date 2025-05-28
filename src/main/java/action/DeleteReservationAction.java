@@ -1,41 +1,37 @@
 package action;
 
+import com.opensymphony.xwork2.ActionSupport;
 import dao.ReservationDao;
 import model.Reservation;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
-public class DeleteReservationAction {
-    private ReservationDao reservationDao;
-    private Long reservationId;
-    private Long userId;
+public class DeleteReservationAction extends ActionSupport {
+    private Long id;
 
     public String execute(){
-        Reservation reservation = reservationDao.getById(reservationId);
+        ReservationDao reservationDao = new ReservationDao();
+        Reservation reservation = reservationDao.getById(id);
 
+        if(id == null){
+            System.out.println("id is null");
+            return ERROR;
+        }
         if(reservation == null){
             return ERROR;
         }
 
-        reservationDao.delete(reservationId);
+        reservationDao.delete(id);
 
         return SUCCESS;
     }
 
-    public Long getReservationId() {
-        return reservationId;
+    public Long getId() {
+        return id;
     }
 
-    public void setReservationId(Long reservationId) {
-        this.reservationId = reservationId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

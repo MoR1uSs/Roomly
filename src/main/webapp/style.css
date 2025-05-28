@@ -7,6 +7,7 @@
 body{
     background-color: var(--background-color);
 }
+
 .roomly{
     color: var(--logo-color);
 }
@@ -157,4 +158,33 @@ body{
     border-bottom: 1px rgba(0, 0, 0, 0.137) solid;
     padding: 1.5rem;
     margin-bottom: 10px;
+}
+
+.delete{
+    padding: 5px 10px 5px 10px;
+    background: linear-gradient(to left, #ec6969, #f35050);
+    border: 0;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fde7e7;
+}
+
+.update {
+    font-weight: 600;
+    padding: 5px 10px 5px 10px;
+    background: linear-gradient(to left, #98c3df, #94a9d8);
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #e7fafd;
+}
+
+.d-u-buttons{
+    display: flex;
+    gap: 1rem;
+}
+
+.new-form{
+    display: none;
 }
