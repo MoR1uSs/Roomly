@@ -38,6 +38,7 @@
     </div>
     <div class="main">
       <div class="filter">
+        <input name="term" type="text" id="search" placeholder="Typ hier..." />
         <select id="dropdown-filters" name="filters">
           <option value="" disabled selected hidden>Filter op...</option>
           <option value="fiat">Status</option>
@@ -45,7 +46,6 @@
           <option value="saab">Locatie</option>
           <option value="audi">Capaciteit</option>
         </select>
-        <input name="term" type="text" id="search" placeholder="Typ hier..." />
       </div>
       <div class="new-form"></div>
       <div class="items">

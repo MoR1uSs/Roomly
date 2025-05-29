@@ -34,6 +34,23 @@
             <button id="logout-but">Uitloggen</button>
         </form>
     </div>
+    <div class="hidden-window">
+        <form class="hidden-form">
+            <div class="container">
+                <div class="update-form">
+                    <h3>Voer nieuwe tijd in</h3>
+                    <s:form action="update-reservation" method="post" theme="simple">
+                        <label>Begintijd: <input type="time" name="beginTime" required></label>
+                        <label>Eindtijd: <input type="time" name="endTime" required></label>
+                        <div class="buttons">
+                            <button type="button" onclick="hideUpdateScreen()">Annuleren</button>
+                            <s:submit value="Bewerken" cssClass="submit-button"/>
+                        </div>
+                    </s:form>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="main">
             <h2>Jouw reservaties</h2>
             <div class="items">
@@ -50,7 +67,7 @@
                         <p><s:property value="beginTime +' - '+ endTime"/> </p>
                         <p><s:property value="description"/></p>
                         <div class="d-u-buttons">
-                            <button class="update">Bewerken</button>
+                            <button class="update" onclick="showUpdateScreen()">Bewerken</button>
                             <form action="delete-action">
                                 <input type="hidden" name="id" value="<s:property value='id'/>" />
                                 <button class="delete" type="submit">Verwijderen</button>
@@ -61,6 +78,16 @@
             </div>
         </div>
     </div>
-    </div>
+    <script>
+        const element = document.querySelector(".hidden-window");
+
+        function hideUpdateScreen(){
+            element.style.display = "none";
+        }
+
+        function showUpdateScreen(){
+            element.style.display = "block";
+        }
+    </script>
 </body>
 </html>
