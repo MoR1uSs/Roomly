@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="variables.css">
+  <script src="scripts.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -38,31 +39,32 @@
     </div>
     <div class="main">
       <div class="filter">
-        <input name="term" type="text" id="search" placeholder="Typ hier..." />
+        <i id="search-icon" class="fa-solid fa-magnifying-glass"></i>
+        <input name="term" type="search" id="search" placeholder= "Typ hier..." />
         <select id="dropdown-filters" name="filters">
-          <option value="" disabled selected hidden>Filter op...</option>
-          <option value="fiat">Status</option>
-          <option value="volvo">Faciliteiten</option>
-          <option value="saab">Locatie</option>
-          <option value="audi">Capaciteit</option>
+          <option value="name">Naam</option>
+          <option value="facilities">Faciliteit</option>
+          <option value="capacity">Capaciteit</option>
+         <!-- <option value="status">Status</option>
+          <option value="location">Locatie</option>-->
         </select>
       </div>
       <div class="new-form"></div>
       <div class="items">
         <p>Naam</p>
         <p>Capaciteit</p>
-        <p>Faciliteiten</p>
+        <p>Faciliteit</p>
         <p>Locatie</p>
         <p>Status</p>
       </div>
       <div class="workspaces">
         <s:iterator value = "workspaces">
           <div class="workspace">
-            <h2><s:property value="name"/></h2>
-            <p class="capacity"><s:property value="capacity"/></p>
-            <p><s:property value="facilities"/></p>
-            <p><s:property value="location"/></p>
-            <p class="status"><s:property value="status"/></p>
+            <h2 data-name='<s:property value="name"/>'><s:property value="name"/></h2>
+            <p data-capacity='<s:property value="capacity"/>' class="capacity"><s:property value="capacity"/></p>
+            <p data-facilities='<s:property value="facilities"/>' ><s:property value="facilities"/></p>
+            <p data-location='<s:property value="location"/>'><s:property value="location"/></p>
+            <p data-status='<s:property value="status"/>' class="status"><s:property value="status"/></p>
           </div>
         </s:iterator>
         <div class="button-wrapper">
@@ -73,9 +75,9 @@
       </div>
     </div>
     <script>
-       let elements = document.querySelectorAll(".status");
+       let status = document.querySelectorAll(".status");
 
-       elements.forEach(el => {
+       status.forEach(el => {
           el.style.fontWeight = "800";
           el.style.opacity = 1;
           if(el.innerHTML == "Vrij"){

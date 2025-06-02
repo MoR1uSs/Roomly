@@ -143,6 +143,16 @@ body{
   padding: 10px;
 }
 
+#search-icon{
+    margin-top: 5px;
+    font-size: 15px;
+    color: grey;
+}
+
+.hidden {
+    display: none !important;
+}
+
 .capacity {
     margin-left: 20px;
 }
