@@ -18,7 +18,7 @@
     </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>register.jsp</welcome-file>
+        <welcome-file>new-sample.jsp</welcome-file>
     </welcome-file-list>
 
     <session-config>
