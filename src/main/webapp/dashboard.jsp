@@ -10,7 +10,7 @@
     <link href="style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body>sp'">
 <div class="container">
     <div class="nav-bar">
         <h1 class="roomly">Roomly</h1>
@@ -21,7 +21,7 @@
             <p onclick="window.location.href = 'lokalen.action'">
                 <i class="fa fa-list-ol"></i> Lokalen
             </p>
-            <p>
+            <p onclick="window.location.href='kalender.jsp  '">
                 <i class="fa fa-calendar-days"></i> Kalender
             </p>
         </div>
