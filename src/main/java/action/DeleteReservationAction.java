@@ -18,6 +18,7 @@ public class DeleteReservationAction extends ActionSupport {
             System.out.println("id is null");
             return ERROR;
         }
+
         if(reservation == null){
             return ERROR;
         }

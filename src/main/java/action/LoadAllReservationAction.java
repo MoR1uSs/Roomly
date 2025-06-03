@@ -2,39 +2,38 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 import dao.ReservationDao;
+import dao.UserDao;
 import dao.WorkspaceDao;
 import model.Reservation;
+import model.User;
+import model.enums.Role;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Session;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import static model.enums.Role.DOCENT;
 
-public class ReservationsLoadAction extends ActionSupport implements SessionAware{
+public class LoadAllReservationAction extends ActionSupport implements SessionAware {
     private List<Reservation> reservations;
     private Map<String, Object> session;
 
-    public String execute() {
+    public String execute(){
         ReservationDao reservationDao = new ReservationDao();
-        Map<String, Object> session = ActionContext.getContext().getSession();
+        reservations = reservationDao.findAll();
 
-        System.out.println((Long)session.get("userId"));
-        reservations = reservationDao.getReservationsByUserId((Long)session.get("userId"));
         return SUCCESS;
     }
 
     public List<Reservation> getReservations() {
         return reservations;
     }
+
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
@@ -54,9 +53,26 @@ public class ReservationsLoadAction extends ActionSupport implements SessionAwar
         return formattedDate;
     }
 
-    public boolean getCheckRole() {
+    public String getUsername(Long reservationId) {
+        ReservationDao reservationDao = new ReservationDao();
+        UserDao userDao = new UserDao();
+
+        Reservation reservation = reservationDao.getById(reservationId);
+
+        User user = userDao.getUserById(reservation.getUserId());
+
+        return user.getName() + " " + user.getSurname();
+    }
+
+    public boolean checkRole(){
+        session = ActionContext.getContext().getSession();
         Object role = session.get("userRole");
-        return DOCENT.equals(role);
+
+        if(role.equals(DOCENT)){
+            return true;
+        }
+
+        return false;
     }
 
     @Override

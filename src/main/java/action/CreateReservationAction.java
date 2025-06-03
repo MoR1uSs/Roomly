@@ -65,6 +65,16 @@ public class CreateReservationAction extends ActionSupport {
             }
         }
 
+        if(parsedDate.isBefore(LocalDate.now())){
+            addActionError("Deze datum is al verstreken.");
+            return INPUT;
+        }
+
+        if(parsedBeginTime.isBefore(LocalTime.now())){
+            addActionError("Deze tijd is al verstreken.");
+            return INPUT;
+        }
+
         if(description != null){
             reservation.setDescription(description);
         }

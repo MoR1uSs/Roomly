@@ -18,6 +18,12 @@
     <div class="nav-bar">
       <h1 class="roomly">Roomly</h1>
       <div class="nav-bar-items">
+        <s:if test="checkRole">
+          <p onclick="window.location.href = 'admin-dashboard.action'">
+            <i class="fa-solid fa-lock-open"></i> Beheerderspaneel
+          </p>
+        </s:if>
+
         <p onclick="window.location.href='load-reservations.action'">
           <i class="fa fa-home"></i> Dashboard
         </p>
@@ -36,6 +42,39 @@
       <form action="logout">
         <button id="logout-but">Uitloggen</button>
       </form>
+    </div>
+    <div class="overlay"></div>
+    <div class="hidden-window">
+        <div class="hidden-form">
+          <div class="reservations-container">
+            <h2>Nieuwe locatie reservering</h2>
+            <div class="form-layout">
+              <div class="left-panel">
+                <s:form action="create-reservation" method="post" theme="simple">
+                  <label>Locatie:</label>
+                  <s:select
+                          id="workspace"
+                          name="selectedWorkspaceId"
+                          list="workspaces"
+                          listKey="id"
+                          listValue="name"
+                          headerKey=""
+                          cssClass="workspaces-list"
+                          headerValue="-- Maak een keuze --" /><br>
+                  <label>Date: <input type="date" name="date" required></label>
+                  <label>Begintijd: <input type="time" name="beginTime" required></label>
+                  <label>Eindtijd: <input type="time" name="endTime" required></label>
+                  <label for="description">Omschrijving:</label>
+                  <s:textfield id="description" name="description"/>
+                  <div class="buttons">
+                    <input type="button" class="submit-button" value="Annuleren" onclick="hideUpdateScreen()">
+                    <s:submit value="Reserveren" cssClass="submit-button"/>
+                  </div>
+                </s:form>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="main">
       <div class="filter">
@@ -68,8 +107,8 @@
           </div>
         </s:iterator>
         <div class="button-wrapper">
-          <form action="reservation-form">
-            <button class="reserve-button">Reserveren</button>
+          <form>
+            <button type="button" onclick="showUpdateScreen()" class="reserve-button">Reserveren</button>
           </form>
         </div>
       </div>
@@ -79,13 +118,26 @@
 
        status.forEach(el => {
           el.style.fontWeight = "800";
-          el.style.opacity = 1;
-          if(el.innerHTML == "Vrij"){
+          if(el.innerHTML === "Vrij"){
             el.style.color = "rgba(24,202,43,0.66)";
           } else {
             el.style.color = "rgba(255,15,15,0.76)";
           }
        });
+
+
+       const element = document.querySelector(".hidden-window");
+       const overlay = document.querySelector(".overlay");
+
+       function hideUpdateScreen(){
+         overlay.style.display = "none";
+         element.style.display = "none";
+       }
+
+       function showUpdateScreen(){
+         overlay.style.display = "block";
+         element.style.display = "block";
+       }
     </script>
   </div>
 </body>

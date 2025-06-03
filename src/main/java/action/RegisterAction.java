@@ -26,13 +26,17 @@ public class RegisterAction extends ActionSupport {
 
         User user = new User();
         Role role = userDAO.determineRole(email);
-        user.setName(name);
-        user.setSurname(surname);
+        user.setName(capitalize(name));
+        user.setSurname(capitalize(surname));
         user.setEmail(email);
         user.setPassword(password);
         user.setRole(role);
         userDAO.save(user);
         return SUCCESS;
+    }
+
+    public String capitalize(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     public String getPassword() {

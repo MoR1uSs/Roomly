@@ -3,6 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.UserDao;
 import model.User;
+import model.enums.Role;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.Map;
@@ -23,6 +24,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
             session.put("userId", user.getId());
             session.put("userEmail", email);
             session.put("userRole", user.getRole());
+
+            if(user.getRole().equals(Role.DOCENT)){
+                return "admin";
+            }
+
             return SUCCESS;
         } else {
             addActionError("Verkeerde gebruikersnaam of wachtwoord.");

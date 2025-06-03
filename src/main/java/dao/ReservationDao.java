@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +29,24 @@ public class ReservationDao {
         return daoManager.findById(id);
     }
 
-    public void update(Reservation reservation){
+    public void update(Reservation reservation) {
+        daoManager.update(reservation);
+    }
+
+    public void updateTime(Long id, LocalTime begin, LocalTime end){
+        if(begin == null || end == null || id == null) {
+            return;
+        }
+
+        Reservation reservation = daoManager.findById(id);
+
+        if(reservation == null) {
+            throw new HibernateException("reservation not found");
+        }
+
+        reservation.setBeginTime(begin);
+        reservation.setEndTime(end);
+
         daoManager.update(reservation);
     }
 

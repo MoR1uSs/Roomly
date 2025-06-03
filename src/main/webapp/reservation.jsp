@@ -29,7 +29,8 @@
                     listValue="name"
                     headerKey=""
                     cssClass="workspaces"
-                    headerValue="-- Maak een keuze --" />
+                    headerValue="-- Maak een keuze --"
+                    required="required"/>
                 <label>Date: <input type="date" name="date" required></label>
                 <label>Begintijd: <input type="time" name="beginTime" required></label>
                 <label>Eindtijd: <input type="time" name="endTime" required></label>

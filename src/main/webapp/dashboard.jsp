@@ -15,6 +15,13 @@
     <div class="nav-bar">
         <h1 class="roomly">Roomly</h1>
         <div class="nav-bar-items">
+
+            <s:if test="checkRole">
+                <p onclick="window.location.href = 'admin-dashboard.action'">
+                    <i class="fa-solid fa-lock-open"></i> Beheerderspaneel
+                </p>
+            </s:if>
+
             <p onclick="window.location.href='load-reservations.action'">
                 <i class="fa fa-home"></i> Dashboard
             </p>
@@ -34,22 +41,25 @@
             <button id="logout-but">Uitloggen</button>
         </form>
     </div>
-    <div class="hidden-window">
-        <form class="hidden-form">
-            <div class="container">
-                <div class="update-form">
-                    <h3>Voer nieuwe tijd in</h3>
-                    <s:form action="update-reservation" method="post" theme="simple">
-                        <label>Begintijd: <input type="time" name="beginTime" required></label>
-                        <label>Eindtijd: <input type="time" name="endTime" required></label>
-                        <div class="buttons">
-                            <button type="button" onclick="hideUpdateScreen()">Annuleren</button>
-                            <s:submit value="Bewerken" cssClass="submit-button"/>
-                        </div>
-                    </s:form>
+    <div class="overlay">
+        <div class="hidden-window">
+            <div class="hidden-form">
+                <div class="container">
+                    <div class="update-form">
+                        <h3>Voer nieuwe tijd in</h3>
+                        <s:form action="update-reservation" method="post" theme="simple">
+                            <label>Begintijd: <input type="time" name="newBeginTime" required></label>
+                            <label>Eindtijd: <input type="time" name="newEndTime" required></label>
+                            <div class="buttons">
+                                <input type="hidden" name="id" class="reservation-id" />
+                                <input type="submit" value="Annuleren" onclick="hideUpdateScreen()">
+                                <s:submit value="Bewerken"/>
+                            </div>
+                        </s:form>
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     <div class="main">
             <h2>Jouw reservaties</h2>
@@ -67,10 +77,10 @@
                         <p><s:property value="beginTime +' - '+ endTime"/> </p>
                         <p><s:property value="description"/></p>
                         <div class="d-u-buttons">
-                            <button class="update" onclick="showUpdateScreen()">Bewerken</button>
-                            <form action="delete-action">
+                            <button class="update" onclick="showUpdateScreen(<s:property value='id'/>)">Bewerken</button>
+                            <form action="delete-action" method="post">
                                 <input type="hidden" name="id" value="<s:property value='id'/>" />
-                                <button class="delete" type="submit">Verwijderen</button>
+                                <s:submit value="Verwijderen" class="delete"/>
                             </form>
                         </div>
                     </div>
@@ -80,12 +90,16 @@
     </div>
     <script>
         const element = document.querySelector(".hidden-window");
+        const overlay = document.querySelector(".overlay");
 
         function hideUpdateScreen(){
+            overlay.style.display = "none";
             element.style.display = "none";
         }
 
-        function showUpdateScreen(){
+        function showUpdateScreen(id){
+            document.querySelector(".reservation-id").value = id;
+            overlay.style.display = "block";
             element.style.display = "block";
         }
     </script>

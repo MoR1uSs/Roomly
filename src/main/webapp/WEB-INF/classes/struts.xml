@@ -7,9 +7,11 @@
     <package name="default" namespace="/" extends="struts-default">
         <interceptors>
             <interceptor name="authentication" class="interceptor.AuthenticationInterceptor"/>
+            <interceptor name="admin" class="interceptor.AdminInterceptor"/>
         </interceptors>
         <action name="login" class="action.LoginAction" method="doLogin">
             <result name="input">/login.jsp</result>
+            <result name="admin" type="redirectAction">admin-dashboard</result>
             <result name="success" type="redirectAction">lokalen</result>
             <result name="error">/login.jsp</result>
         </action>
@@ -27,17 +29,16 @@
             <result name="error">/register.jsp</result>
         </action>
 
-        <!-- To load -->
-        <action name="reservation-form" class="action.DropdownAction">
-            <result name="success">/reservation.jsp</result>
-            <result name="error">/error.jsp</result>
-            <result name="login">/login.jsp</result>
+        <action name="admin-dashboard" class="action.LoadAllReservationAction">
+            <interceptor-ref name="admin"/>
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">/admindashboard.jsp</result>
         </action>
 
         <!-- To handle  -->
         <action name="create-reservation" class="action.CreateReservationAction">
-            <result name="success">load-reservations</result>
-            <result name="input">/reservation.jsp</result>
+            <result name="success" type="redirectAction">load-reservations</result>
+            <result name="input">/lokalen.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
 
@@ -52,8 +53,12 @@
         </action>
 
         <action name="delete-action" class="action.DeleteReservationAction">
-            <result name="success">/load-reservations.action</result>
+            <result name="success" type="redirectAction">load-reservations</result>
             <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="update-reservation" class="action.UpdateReservationAction">
+            <result name="success" type="redirectAction">load-reservations</result>
         </action>
     </package>
 </struts>
