@@ -61,6 +61,11 @@
             </div>
         </div>
     </div>
+
+    <s:if test="reservations == null || reservations.isEmpty()">
+        <p class="no-reservations-p">Nog geen reservaties</p>
+    </s:if>
+    <s:else>
     <div class="main">
             <h2>Jouw reservaties</h2>
             <div class="items">
@@ -70,21 +75,22 @@
                 <p>Beschrijving</p>
             </div>
             <div class="workspaces">
-                <s:iterator value = "reservations">
-                    <div class="workspace">
-                        <p><s:property value="parseDate(id)"/></p>
-                        <p><s:property value="getWorkspaceNames(workspaceId)"/></p>
-                        <p><s:property value="beginTime +' - '+ endTime"/> </p>
-                        <p><s:property value="description"/></p>
-                        <div class="d-u-buttons">
-                            <button class="update" onclick="showUpdateScreen(<s:property value='id'/>)">Bewerken</button>
-                            <form action="delete-action" method="post">
-                                <input type="hidden" name="id" value="<s:property value='id'/>" />
-                                <s:submit value="Verwijderen" class="delete"/>
-                            </form>
+                    <s:iterator value = "reservations">
+                        <div class="workspace">
+                            <p><s:property value="parseDate(id)"/></p>
+                            <p><s:property value="getWorkspaceNames(workspaceId)"/></p>
+                            <p><s:property value="beginTime +' - '+ endTime"/> </p>
+                            <p><s:property value="description"/></p>
+                            <div class="d-u-buttons">
+                                <button class="update" onclick="showUpdateScreen(<s:property value='id'/>)">Bewerken</button>
+                                <form action="delete-action" method="post">
+                                    <input type="hidden" name="id" value="<s:property value='id'/>" />
+                                    <s:submit value="Verwijderen" class="delete"/>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </s:iterator>
+                    </s:iterator>
+                </s:else>
             </div>
         </div>
     </div>

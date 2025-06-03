@@ -25,6 +25,7 @@
       <p onclick="window.location.href='load-reservations.action'">
         <i class="fa fa-home"></i> Dashboard
       </p>
+
       <p onclick="window.location.href = 'lokalen.action'">
         <i class="fa fa-list-ol"></i> Lokalen
       </p>

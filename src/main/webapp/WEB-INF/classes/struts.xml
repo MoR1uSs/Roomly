@@ -54,6 +54,7 @@
 
         <action name="delete-action" class="action.DeleteReservationAction">
             <result name="success" type="redirectAction">load-reservations</result>
+            <result name="admin" type="redirectAction">admin-dashboard</result>
             <result name="error">/error.jsp</result>
         </action>
 

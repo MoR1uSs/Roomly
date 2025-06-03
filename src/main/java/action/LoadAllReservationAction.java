@@ -64,15 +64,9 @@ public class LoadAllReservationAction extends ActionSupport implements SessionAw
         return user.getName() + " " + user.getSurname();
     }
 
-    public boolean checkRole(){
-        session = ActionContext.getContext().getSession();
+    public boolean getCheckRole() {
         Object role = session.get("userRole");
-
-        if(role.equals(DOCENT)){
-            return true;
-        }
-
-        return false;
+        return DOCENT.equals(role);
     }
 
     @Override

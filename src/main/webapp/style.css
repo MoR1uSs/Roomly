@@ -227,6 +227,14 @@ body{
     border-radius: 5px;
 }
 
+.no-reservations-p{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(-10%, 10%);
+    opacity: 0.5;
+}
+
 .update-form{
     width: 350px;
     margin: 0 auto;
