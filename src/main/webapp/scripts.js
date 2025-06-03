@@ -28,7 +28,7 @@ document.querySelector("#search").addEventListener("input", (event) =>{
         let elements = document.querySelectorAll("[data-capacity]");
 
         elements.forEach(el => {
-            let capacity = el.dataset.capacity.toLowerCase();
+            let capacity = el.dataset.capacity;
 
             if (capacity.includes(input)) {
                 el.parentElement.classList.remove("hidden")
