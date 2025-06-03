@@ -70,11 +70,6 @@ public class CreateReservationAction extends ActionSupport {
             return INPUT;
         }
 
-        if(parsedBeginTime.isBefore(LocalTime.now())){
-            addActionError("Deze tijd is al verstreken.");
-            return INPUT;
-        }
-
         if(description != null){
             reservation.setDescription(description);
         }
