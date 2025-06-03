@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="variables.css">
-  <script src="scripts.js" defer></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/variables.css">
+  <script src="${pageContext.request.contextPath}/scripts/scripts.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>

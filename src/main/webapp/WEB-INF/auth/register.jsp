@@ -6,14 +6,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roomly Registratie</title>
-  <link rel="stylesheet" href="CSS/Registeren.css" />
-  <link rel="IMGICON" href="IMG/RoomlyHoofd.png" type="image/png" sizes="16x16" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Registeren.css" />
+  <link rel="icon" href="${pageContext.request.contextPath}/img/RoomlyHoofd.png" type="image/png" sizes="16x16" />
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
     <h1 class="logo">
-      <img src="IMG/RoomlyHoofd.png" alt="Roomly Logo" class="logo-img" style="height: 1em; vertical-align: middle;" />
+      <img src="${pageContext.request.contextPath}/img/RoomlyHoofd.png" alt="Roomly Logo" class="logo-img" style="height: 1em; vertical-align: middle;" />
       ROOMLY
     </h1>
     <div class="register-box">
