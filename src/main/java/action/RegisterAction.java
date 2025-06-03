@@ -3,21 +3,16 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.UserDao;
 import model.User;
-import model.Role;
+import model.enums.Role;
 
 public class RegisterAction extends ActionSupport {
-    private String username;
+    private String name;
+    private String surname;
     private String email;
     private String password;
 
     public String execute() {
-        System.out.println("Register action is called");
         UserDao userDAO = new UserDao();
-
-        if(userDAO.getUserByUsername(username) != null) {
-            addActionError("Gebruikersnaam bestaat al.");
-            return ERROR;
-        }
 
         if(!email.toLowerCase().endsWith("scalda.nl")){
             addActionError("E-mailadres moet eindigen op @scalda.nl");
@@ -31,12 +26,17 @@ public class RegisterAction extends ActionSupport {
 
         User user = new User();
         Role role = userDAO.determineRole(email);
-        user.setUsername(username);
+        user.setName(capitalize(name));
+        user.setSurname(capitalize(surname));
         user.setEmail(email);
         user.setPassword(password);
         user.setRole(role);
-        userDAO.saveUser(user);
+        userDAO.save(user);
         return SUCCESS;
+    }
+
+    public String capitalize(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     public String getPassword() {
@@ -47,13 +47,22 @@ public class RegisterAction extends ActionSupport {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getEmail() {
         return email;
     }

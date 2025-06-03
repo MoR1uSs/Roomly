@@ -1,0 +1,7 @@
+:root {
+    --background-color: #f0f9ff;
+    --button-color: #3da9fc;
+    --button-transition-button: #2567ca;
+    --logo-color: #094067;
+    --panel-background-color: linear-gradient(to bottom right, #f5fcff, #ffffff);
+}

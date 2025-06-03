@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.Role;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,7 +13,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String name;
+    private String surname;
     private String email;
     private String password;
     private Role role;
@@ -19,8 +22,9 @@ public class User {
     public User(){
     }
 
-    public User(String username, String email, String password, Role role){
-        this.username = username;
+    public User(String name, String surname, String email, String password, Role role){
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -34,10 +38,6 @@ public class User {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -46,8 +46,20 @@ public class User {
         this.role = role;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Long getId() {

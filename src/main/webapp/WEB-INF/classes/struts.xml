@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="authentication" class="interceptor.AuthenticationInterceptor"/>
+            <interceptor name="admin" class="interceptor.AdminInterceptor"/>
+        </interceptors>
+        <action name="login" class="action.LoginAction" method="doLogin">
+            <result name="input">WEB-INF/auth/login.jsp</result>
+            <result name="admin" type="redirectAction">admin-dashboard</result>
+            <result name="success" type="redirectAction">lokalen</result>
+            <result name="error">WEB-INF/auth/login.jsp</result>
+        </action>
+
+        <action name="lokalen" class="action.WorkspaceLoadAction">
+            <interceptor-ref name="authentication"/>
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">WEB-INF/generic/lokalen.jsp</result>
+            <result name="error">WEB-INF/generic/error.jsp</result>
+            <result name="login">WEB-INF/auth/login.jsp</result>
+        </action>
+
+        <action name="redirect-register">
+            <result name="success">WEB-INF/auth/register.jsp</result>
+        </action>
+
+        <action name="register" class="action.RegisterAction">
+            <result name="success">WEB-INF/auth/login.jsp</result>
+            <result name="error">WEB-INF/auth/register.jsp</result>
+        </action>
+
+        <action name="admin-dashboard" class="action.LoadAllReservationAction">
+            <interceptor-ref name="admin"/>
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">WEB-INF/admin/admindashboard.jsp</result>
+        </action>
+
+        <!-- To handle  -->
+        <action name="create-reservation" class="action.CreateReservationAction">
+            <result name="success" type="redirectAction">load-reservations</result>
+            <result name="input">WEB-INF/generic/lokalen.jsp</result>
+            <result name="error">WEB-INF/generic/error.jsp</result>
+        </action>
+
+        <action name="logout" class="action.LogoutAction">
+            <result name="success">WEB-INF/auth/login.jsp</result>
+            <result name="error">WEB-INF/generic/error.jsp</result>
+        </action>
+
+        <action name="load-reservations" class="action.ReservationsLoadAction">
+            <result name="success">WEB-INF/generic/dashboard.jsp</result>
+            <result name="error">WEB-INF/generic/error.jsp</result>
+        </action>
+
+        <action name="delete-action" class="action.DeleteReservationAction">
+            <result name="success" type="redirectAction">load-reservations</result>
+            <result name="admin" type="redirectAction">admin-dashboard</result>
+            <result name="error">WEB-INF/generic/error.jsp</result>
+        </action>
+
+        <action name="update-reservation" class="action.UpdateReservationAction">
+            <result name="success" type="redirectAction">load-reservations</result>
+        </action>
+    </package>
+</struts>
