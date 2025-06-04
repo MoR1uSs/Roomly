@@ -10,9 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/variables.css">
-  <script src="${pageContext.request.contextPath}/scripts/scripts.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+  <script src="${pageContext.request.contextPath}/scripts/filter-reservations.js" defer></script>
+  <script src="${pageContext.request.contextPath}/scripts/filter-workspaces.js" defer></script>
+  </head>
 <body>
   <div class="container">
     <div class="nav-bar">
@@ -47,8 +48,8 @@
     <div class="hidden-window">
         <div class="hidden-form">
           <div class="reservations-container">
-            <h2>Nieuwe locatie reservering</h2>
             <div class="form-layout">
+              <h2>Nieuwe locatie reservering</h2>
               <div class="left-panel">
                 <s:form action="create-reservation" method="post" theme="simple">
                   <label>Locatie:</label>
@@ -72,6 +73,17 @@
                   </div>
                 </s:form>
               </div>
+            </div>
+            <div class="right-panel">
+                <s:iterator value="reservations">
+                  <div class="reservation-wrapper" data-location="<s:property value='getWorkspaceNames(id)'/>">
+                    <h3 data-reservation-date><s:property value="parseDate(id)"/></h3>
+                    <div class="time">
+                      <p data-reservation-time><s:property value="beginTime + ' - ' + endTime"/></p>
+                      <i class="fa-regular fa-calendar"></i>
+                    </div>
+                  </div>
+                </s:iterator>
             </div>
           </div>
         </div>
@@ -104,12 +116,12 @@
             <p data-facilities='<s:property value="facilities"/>' ><s:property value="facilities"/></p>
             <p data-location='<s:property value="location"/>'><s:property value="location"/></p>
             <p data-status='<s:property value="status"/>' class="status"><s:property value="status"/></p>
+            <form>
+              <button type="button" onclick="showUpdateScreen()" class="reserve-button">Reserveren</button>
+            </form>
           </div>
         </s:iterator>
         <div class="button-wrapper">
-          <form>
-            <button type="button" onclick="showUpdateScreen()" class="reserve-button">Reserveren</button>
-          </form>
         </div>
       </div>
     </div>
@@ -138,6 +150,8 @@
          overlay.style.display = "block";
          element.style.display = "block";
        }
+
+       showUpdateScreen();
     </script>
   </div>
 </body>
