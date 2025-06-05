@@ -137,20 +137,20 @@ body{
 }
 
 .items, .workspace {
-  display: grid !important;
-  grid-template-columns: repeat(6, 220px);
-  gap: 10px;
-  padding: 10px;
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr);  /* Use fr units for equal distribution */
+    font-weight: 500;
+    padding: 10px;
 }
 
-.update-buttons{
-
+.workspace p, h3, h4 {
+    color: #3f4149;
 }
 
 #search-icon{
     margin-top: 5px;
-    font-size: 15px;
-    opacity: 0.7;
+    font-size: 14px;
+    opacity: 0.5;
     color: grey;
 }
 
@@ -287,12 +287,16 @@ input[type="text"]{
     border-radius: 4px;
 }
 
+.form-layout h2{
+    margin-bottom: 8px;
+}
+
 .reservations-container {
     display: flex;
     gap: 15px;
     justify-content: space-between;
     max-width: 1500px;
-    padding: 20px;
+    padding: 30px;
     background: white;
     border: rgb(157, 175, 188) solid 3px;
     border-radius: 5px;
@@ -307,9 +311,8 @@ input[type="text"]{
 }
 
 .right-panel {
-    opacity: 0.8;
     padding: 2rem;
-    background-color: rgba(138, 138, 138, 0.38);
+    background-color: rgba(186, 186, 186, 0.5);
     min-width: 150px;
     border-radius: 7px;
 }
@@ -319,10 +322,11 @@ input[type="text"]{
 }
 
 .reservation-wrapper {
+    opacity: 0.8;
     padding: 7px;
     margin-bottom: 12px;
     border-radius: 4px;
-    background-color: #ffffff;
+    background-color: rgb(255, 255, 255);
 }
 
 .time{

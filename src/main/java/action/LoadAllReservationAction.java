@@ -1,18 +1,15 @@
 package action;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.ReservationDao;
 import dao.UserDao;
 import dao.WorkspaceDao;
 import model.Reservation;
 import model.User;
-import model.enums.Role;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;

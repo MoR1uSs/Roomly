@@ -6,9 +6,7 @@ if(searchInput && filter){
     const filterInput = (elements, filter, input) => {
         elements.forEach(el => {
             const elementValue = el.dataset[filter]?.toLowerCase() || '';
-
             const shouldShow = elementValue.includes(input);
-
             el.parentElement.classList.toggle("hidden", !shouldShow);
         })
     }
@@ -17,9 +15,9 @@ if(searchInput && filter){
         const input = event.target.value.toLowerCase();
 
         if (input.trim() === "") {
-            workspaces.forEach(el =>{
+            workspaces.forEach(el => {
                 el.classList.remove("hidden");
-            })
+            });
             return;
         }
 
@@ -28,11 +26,11 @@ if(searchInput && filter){
                 filterInput(document.querySelectorAll("[data-name]"), "name", input);
                 break;
             case "capacity":
-                filterInput(document.querySelectorAll("[data-capacity]", "capacity", input));
+                filterInput(document.querySelectorAll("[data-capacity]"), "capacity", input);
                 break;
             case "facilities":
-                filterInput(document.querySelectorAll("[data-faciilities]", "facilities", input));
+                filterInput(document.querySelectorAll("[data-facilities]"), "facilities", input);
                 break;
         }
-    })
+    });
 }

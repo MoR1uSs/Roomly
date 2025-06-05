@@ -42,7 +42,7 @@
         <!-- To handle  -->
         <action name="create-reservation" class="action.CreateReservationAction">
             <result name="success" type="redirectAction">load-reservations</result>
-            <result name="input">WEB-INF/generic/lokalen.jsp</result>
+            <result name="input" type="redirectAction">lokalen</result>
             <result name="error">WEB-INF/generic/error.jsp</result>
         </action>
 

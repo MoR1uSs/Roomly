@@ -85,6 +85,11 @@
                   </div>
                 </s:iterator>
             </div>
+            <s:if test="hasActionErrors()">
+              <div style="color: red;">
+                <s:actionerror/>
+              </div>
+            </s:if>
           </div>
         </div>
     </div>
@@ -103,21 +108,25 @@
       <div class="new-form"></div>
       <div class="items">
         <p>Naam</p>
-        <p>Capaciteit</p>
-        <p>Faciliteit</p>
         <p>Locatie</p>
+        <p>Faciliteit</p>
+        <p>Capaciteit</p>
         <p>Status</p>
       </div>
       <div class="workspaces">
         <s:iterator value = "workspaces">
           <div class="workspace">
-            <h2 data-name='<s:property value="name"/>'><s:property value="name"/></h2>
-            <p data-capacity='<s:property value="capacity"/>' class="capacity"><s:property value="capacity"/></p>
+            <h3 data-name='<s:property value="name"/>'><s:property value="name"/></h3>
             <p data-facilities='<s:property value="facilities"/>' ><s:property value="facilities"/></p>
             <p data-location='<s:property value="location"/>'><s:property value="location"/></p>
+            <p data-capacity='<s:property value="capacity"/>' class="capacity"><s:property value="capacity"/></p>
             <p data-status='<s:property value="status"/>' class="status"><s:property value="status"/></p>
             <form>
-              <button type="button" onclick="showUpdateScreen()" class="reserve-button">Reserveren</button>
+              <button type="button"
+                      onclick="showUpdateScreen(<s:property value='id'/>, '<s:property value="name"/>')"
+                      class="reserve-button">
+                Reserveren
+              </button>
             </form>
           </div>
         </s:iterator>
@@ -136,22 +145,6 @@
             el.style.color = "rgba(255,15,15,0.76)";
           }
        });
-
-
-       const element = document.querySelector(".hidden-window");
-       const overlay = document.querySelector(".overlay");
-
-       function hideUpdateScreen(){
-         overlay.style.display = "none";
-         element.style.display = "none";
-       }
-
-       function showUpdateScreen(){
-         overlay.style.display = "block";
-         element.style.display = "block";
-       }
-
-       showUpdateScreen();
     </script>
   </div>
 </body>

@@ -77,7 +77,7 @@
             <div class="workspaces">
                     <s:iterator value = "reservations">
                         <div class="workspace">
-                            <p><s:property value="parseDate(id)"/></p>
+                            <h4><s:property value="parseDate(id)"/></h4>
                             <p><s:property value="getWorkspaceNames(workspaceId)"/></p>
                             <p><s:property value="beginTime +' - '+ endTime"/> </p>
                             <p><s:property value="description"/></p>
