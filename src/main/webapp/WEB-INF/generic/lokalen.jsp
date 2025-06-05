@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="${pageContext.request.contextPath}/scripts/filter-reservations.js" defer></script>
   <script src="${pageContext.request.contextPath}/scripts/filter-workspaces.js" defer></script>
+  <script src="${pageContext.request.contextPath}/scripts/reservation-validation.js" defer></script>
   </head>
 <body>
   <div class="container">
@@ -51,7 +52,7 @@
             <div class="form-layout">
               <h2>Nieuwe locatie reservering</h2>
               <div class="left-panel">
-                <s:form action="create-reservation" method="post" theme="simple">
+                <s:form action="create-reservation" method="post" theme="simple" class="reservation-form">
                   <label>Locatie:</label>
                   <s:select
                           id="workspace"
@@ -60,16 +61,16 @@
                           listKey="id"
                           listValue="name"
                           headerKey=""
-                          cssClass="workspaces-list"
-                          headerValue="-- Maak een keuze --" /><br>
-                  <label>Date: <input type="date" name="date" required></label>
-                  <label>Begintijd: <input type="time" name="beginTime" required></label>
-                  <label>Eindtijd: <input type="time" name="endTime" required></label>
+                          cssClass="workspaces-list"/><br>
+                  <label>Date: <input data-date type="date" name="date" required></label>
+                  <label>Begintijd: <input data-beginTime type="time" name="beginTime" required></label>
+                  <label>Eindtijd: <input data-endTime type="time" name="endTime" required></label>
                   <label for="description">Omschrijving:</label>
                   <s:textfield id="description" name="description"/>
                   <div class="buttons">
                     <input type="button" class="submit-button" value="Annuleren" onclick="hideUpdateScreen()">
-                    <s:submit value="Reserveren" cssClass="submit-button"/>
+                    <p id="error-text"></p>
+                    <s:submit value="Reserveren" cssClass="submit-button" id="disabled-button" disabled="false"/>
                   </div>
                 </s:form>
               </div>

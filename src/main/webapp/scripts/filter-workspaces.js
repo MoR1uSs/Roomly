@@ -5,7 +5,7 @@ const filterDropdown = document.querySelector("#dropdown-filters");
 if(searchInput && filterDropdown) {
     searchInput.addEventListener("input", (event) => {
         const input = event.target.value.toLowerCase().trim();
-        const filter = filterDropdown.value; // Get current filter value on each input
+        const filter = filterDropdown.value; // current filter value on each input
 
         workspaces.forEach(workspace => {
             let shouldShow = false;
