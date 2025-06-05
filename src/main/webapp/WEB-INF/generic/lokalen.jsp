@@ -97,19 +97,17 @@
       <div class="filter">
         <i id="search-icon" class="fa-solid fa-magnifying-glass"></i>
         <input name="term" type="search" id="search" placeholder= "Typ hier..." />
-        <select id="dropdown-filters" name="filters">
-          <option value="name">Naam</option>
-          <option value="facilities">Faciliteit</option>
-          <option value="capacity">Capaciteit</option>
-         <!-- <option value="status">Status</option>
-          <option value="location">Locatie</option>-->
+        <select id="dropdown-filters">
+          <option value="name">Name</option>
+          <option value="capacity">Capacity</option>
+          <option value="facilities">Facilities</option>
         </select>
       </div>
       <div class="new-form"></div>
       <div class="items">
         <p>Naam</p>
-        <p>Locatie</p>
         <p>Faciliteit</p>
+        <p>Locatie</p>
         <p>Capaciteit</p>
         <p>Status</p>
       </div>

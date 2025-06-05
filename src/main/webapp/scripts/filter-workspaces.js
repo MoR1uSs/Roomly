@@ -1,36 +1,36 @@
-const filter = document.querySelector("#dropdown-filters").value;
 const workspaces = document.querySelectorAll(".workspace");
 const searchInput = document.querySelector("#search");
+const filterDropdown = document.querySelector("#dropdown-filters");
 
-if(searchInput && filter){
-    const filterInput = (elements, filter, input) => {
-        elements.forEach(el => {
-            const elementValue = el.dataset[filter]?.toLowerCase() || '';
-            const shouldShow = elementValue.includes(input);
-            el.parentElement.classList.toggle("hidden", !shouldShow);
-        })
-    }
+if(searchInput && filterDropdown) {
+    searchInput.addEventListener("input", (event) => {
+        const input = event.target.value.toLowerCase().trim();
+        const filter = filterDropdown.value; // Get current filter value on each input
 
-    searchInput.addEventListener("input", (event) =>{
-        const input = event.target.value.toLowerCase();
+        workspaces.forEach(workspace => {
+            let shouldShow = false;
+            const name = workspace.querySelector('[data-name]')?.dataset.name?.toLowerCase() || '';
+            const capacity = workspace.querySelector('[data-capacity]')?.dataset.capacity?.toLowerCase() || '';
+            const facilities = workspace.querySelector('[data-facilities]')?.dataset.facilities?.toLowerCase() || '';
 
-        if (input.trim() === "") {
-            workspaces.forEach(el => {
-                el.classList.remove("hidden");
-            });
-            return;
-        }
+            if (input === "") {
+                workspace.classList.remove("hidden");
+                return;
+            }
 
-        switch (filter) {
-            case "name":
-                filterInput(document.querySelectorAll("[data-name]"), "name", input);
-                break;
-            case "capacity":
-                filterInput(document.querySelectorAll("[data-capacity]"), "capacity", input);
-                break;
-            case "facilities":
-                filterInput(document.querySelectorAll("[data-facilities]"), "facilities", input);
-                break;
-        }
+            switch (filter) {
+                case "name":
+                    shouldShow = name.includes(input);
+                    break;
+                case "capacity":
+                    shouldShow = capacity.includes(input);
+                    break;
+                case "facilities":
+                    shouldShow = facilities.includes(input);
+                    break;
+            }
+
+            workspace.classList.toggle("hidden", !shouldShow);
+        });
     });
 }

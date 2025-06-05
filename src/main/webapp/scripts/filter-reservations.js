@@ -9,7 +9,6 @@ function hideUpdateScreen(){
 const locationDropdown = document.querySelector(".workspaces-list");
 const reservations = document.querySelectorAll(".reservation-wrapper");
 
-
 function showUpdateScreen(workspaceId, name){
     overlay.style.display = "block";
     element.style.display = "block";
@@ -24,7 +23,6 @@ function showUpdateScreen(workspaceId, name){
         }
     }
 }
-
 
 locationDropdown.addEventListener("change", (event) => {
     if(locationDropdown && reservations) {
