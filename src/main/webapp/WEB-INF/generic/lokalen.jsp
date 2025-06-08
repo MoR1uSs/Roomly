@@ -10,9 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/variables.css">
-  <script src="${pageContext.request.contextPath}/scripts/scripts.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+  <script src="${pageContext.request.contextPath}/scripts/filter-reservations.js" defer></script>
+  <script src="${pageContext.request.contextPath}/scripts/filter-workspaces.js" defer></script>
+  <script type="module" src="${pageContext.request.contextPath}/scripts/reservation-validation.js" defer></script>
+  </head>
 <body>
   <div class="container">
     <div class="nav-bar">
@@ -30,7 +32,7 @@
         <p onclick="window.location.href = 'lokalen.action'">
           <i class="fa fa-list-ol"></i> Lokalen
         </p>
-        <p>
+        <p onclick="window.location.href = `kalender.action`">
           <i class="fa fa-calendar-days"></i> Kalender
         </p>
       </div>
@@ -47,10 +49,10 @@
     <div class="hidden-window">
         <div class="hidden-form">
           <div class="reservations-container">
-            <h2>Nieuwe locatie reservering</h2>
             <div class="form-layout">
+              <h2>Nieuwe locatie reservering</h2>
               <div class="left-panel">
-                <s:form action="create-reservation" method="post" theme="simple">
+                <s:form action="create-reservation" method="post" theme="simple" class="reservation-form">
                   <label>Locatie:</label>
                   <s:select
                           id="workspace"
@@ -59,20 +61,36 @@
                           listKey="id"
                           listValue="name"
                           headerKey=""
-                          cssClass="workspaces-list"
-                          headerValue="-- Maak een keuze --" /><br>
-                  <label>Date: <input type="date" name="date" required></label>
-                  <label>Begintijd: <input type="time" name="beginTime" required></label>
-                  <label>Eindtijd: <input type="time" name="endTime" required></label>
+                          cssClass="workspaces-list"/><br>
+                  <label>Date: <input data-date type="date" name="date" required></label>
+                  <label>Begintijd: <input data-beginTime type="time" name="beginTime" required></label>
+                  <label>Eindtijd: <input data-endTime type="time" name="endTime" required></label>
                   <label for="description">Omschrijving:</label>
                   <s:textfield id="description" name="description"/>
                   <div class="buttons">
                     <input type="button" class="submit-button" value="Annuleren" onclick="hideUpdateScreen()">
-                    <s:submit value="Reserveren" cssClass="submit-button"/>
+                    <p id="error-text"></p>
+                    <s:submit value="Reserveren" cssClass="submit-button" id="disabled-button" disabled="false"/>
                   </div>
                 </s:form>
               </div>
             </div>
+            <div class="right-panel">
+                <s:iterator value="reservations">
+                  <div class="reservation-wrapper" data-location="<s:property value='getWorkspaceNames(id)'/>">
+                    <h3 data-reservation-date><s:property value="parseDate(id)"/></h3>
+                    <div class="time">
+                      <p data-reservation-time><s:property value="beginTime + ' - ' + endTime"/></p>
+                      <i class="fa-regular fa-calendar"></i>
+                    </div>
+                  </div>
+                </s:iterator>
+            </div>
+            <s:if test="hasActionErrors()">
+              <div style="color: red;">
+                <s:actionerror/>
+              </div>
+            </s:if>
           </div>
         </div>
     </div>
@@ -80,36 +98,38 @@
       <div class="filter">
         <i id="search-icon" class="fa-solid fa-magnifying-glass"></i>
         <input name="term" type="search" id="search" placeholder= "Typ hier..." />
-        <select id="dropdown-filters" name="filters">
-          <option value="name">Naam</option>
-          <option value="facilities">Faciliteit</option>
-          <option value="capacity">Capaciteit</option>
-         <!-- <option value="status">Status</option>
-          <option value="location">Locatie</option>-->
+        <select id="dropdown-filters">
+          <option value="name">Name</option>
+          <option value="capacity">Capacity</option>
+          <option value="facilities">Facilities</option>
         </select>
       </div>
       <div class="new-form"></div>
       <div class="items">
         <p>Naam</p>
-        <p>Capaciteit</p>
         <p>Faciliteit</p>
         <p>Locatie</p>
+        <p>Capaciteit</p>
         <p>Status</p>
       </div>
       <div class="workspaces">
         <s:iterator value = "workspaces">
           <div class="workspace">
-            <h2 data-name='<s:property value="name"/>'><s:property value="name"/></h2>
-            <p data-capacity='<s:property value="capacity"/>' class="capacity"><s:property value="capacity"/></p>
+            <h3 data-name='<s:property value="name"/>'><s:property value="name"/></h3>
             <p data-facilities='<s:property value="facilities"/>' ><s:property value="facilities"/></p>
             <p data-location='<s:property value="location"/>'><s:property value="location"/></p>
+            <p data-capacity='<s:property value="capacity"/>' class="capacity"><s:property value="capacity"/></p>
             <p data-status='<s:property value="status"/>' class="status"><s:property value="status"/></p>
+            <form>
+              <button type="button"
+                      onclick="showUpdateScreen(<s:property value='id'/>, '<s:property value="name"/>')"
+                      class="reserve-button">
+                Reserveren
+              </button>
+            </form>
           </div>
         </s:iterator>
         <div class="button-wrapper">
-          <form>
-            <button type="button" onclick="showUpdateScreen()" class="reserve-button">Reserveren</button>
-          </form>
         </div>
       </div>
     </div>
@@ -124,20 +144,6 @@
             el.style.color = "rgba(255,15,15,0.76)";
           }
        });
-
-
-       const element = document.querySelector(".hidden-window");
-       const overlay = document.querySelector(".overlay");
-
-       function hideUpdateScreen(){
-         overlay.style.display = "none";
-         element.style.display = "none";
-       }
-
-       function showUpdateScreen(){
-         overlay.style.display = "block";
-         element.style.display = "block";
-       }
     </script>
   </div>
 </body>

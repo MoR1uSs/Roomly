@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/CSS/variables.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/CSS/style.css" rel="stylesheet">
+    <script type="module" src="${pageContext.request.contextPath}/scripts/change-time-validation.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -28,7 +29,7 @@
             <p onclick="window.location.href = 'lokalen.action'">
                 <i class="fa fa-list-ol"></i> Lokalen
             </p>
-            <p>
+            <p onclick="window.location.href = `kalender.action`">
                 <i class="fa fa-calendar-days"></i> Kalender
             </p>
         </div>
@@ -47,13 +48,14 @@
                 <div class="container">
                     <div class="update-form">
                         <h3>Voer nieuwe tijd in</h3>
-                        <s:form action="update-reservation" method="post" theme="simple">
-                            <label>Begintijd: <input type="time" name="newBeginTime" required></label>
-                            <label>Eindtijd: <input type="time" name="newEndTime" required></label>
+                        <s:form action="update-reservation" method="post" theme="simple" id="update-reservation-form">
+                            <label>Begintijd: <input data-newBeginTime type="time" name="newBeginTime" required></label>
+                            <label>Eindtijd: <input data-newEndTime type="time" name="newEndTime" required></label>
                             <div class="buttons">
                                 <input type="hidden" name="id" class="reservation-id" />
-                                <input type="submit" value="Annuleren" onclick="hideUpdateScreen()">
-                                <s:submit value="Bewerken"/>
+                                <input type="button" value="Annuleren" onclick="hideUpdateScreen()">
+                                <p id="error-text"></p>
+                                <s:submit value="Bewerken" id="update-button"/>
                             </div>
                         </s:form>
                     </div>
@@ -77,7 +79,7 @@
             <div class="workspaces">
                     <s:iterator value = "reservations">
                         <div class="workspace">
-                            <p><s:property value="parseDate(id)"/></p>
+                            <h4><s:property value="parseDate(id)"/></h4>
                             <p><s:property value="getWorkspaceNames(workspaceId)"/></p>
                             <p><s:property value="beginTime +' - '+ endTime"/> </p>
                             <p><s:property value="description"/></p>
