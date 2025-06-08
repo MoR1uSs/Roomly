@@ -1,0 +1,27 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+#calendar {
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    background: white;
+    opacity: 0.8;
+    padding: 2rem;
+    border: 1px solid rgba(145, 145, 145, 0.59);
+}
+
+/* More specific selector to override Bootstrap */
+.fc .fc-scroller.fc-scroller-liquid-absolute {
+    overflow: hidden !important;
+}
+
+/* Additional styles to ensure proper calendar layout */
+.fc .fc-view-harness {
+    overflow: hidden !important;
+}
+
+.fc .fc-scroller {
+    overflow: hidden !important;
+}

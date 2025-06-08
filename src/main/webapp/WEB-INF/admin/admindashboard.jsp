@@ -29,7 +29,7 @@
       <p onclick="window.location.href = 'lokalen.action'">
         <i class="fa fa-list-ol"></i> Lokalen
       </p>
-      <p>
+      <p onclick="window.location.href = `kalender.action`">
         <i class="fa fa-calendar-days"></i> Kalender
       </p>
     </div>

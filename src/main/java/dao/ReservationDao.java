@@ -1,16 +1,13 @@
 package dao;
 
 import model.Reservation;
-import model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,6 +53,25 @@ public class ReservationDao {
 
     public List<Reservation> findAll(){
         return daoManager.findAll();
+    }
+
+    public List<Reservation> findActiveReservations(Long workspaceId, LocalDate date, LocalTime time) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Reservation r WHERE " +
+                    "r.workspaceId = :workspaceId AND " +
+                    "r.date = :date AND " +
+                    "r.beginTime <= :time AND " +
+                    "r.endTime > :time";
+
+            return session.createQuery(hql, Reservation.class)
+                    .setParameter("workspaceId", workspaceId)
+                    .setParameter("date", date)
+                    .setParameter("time", time)
+                    .getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     public List<Reservation> getReservationsByWorkspaceId(Long id){

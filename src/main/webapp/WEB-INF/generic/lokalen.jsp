@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="${pageContext.request.contextPath}/scripts/filter-reservations.js" defer></script>
   <script src="${pageContext.request.contextPath}/scripts/filter-workspaces.js" defer></script>
-  <script src="${pageContext.request.contextPath}/scripts/reservation-validation.js" defer></script>
+  <script type="module" src="${pageContext.request.contextPath}/scripts/reservation-validation.js" defer></script>
   </head>
 <body>
   <div class="container">
@@ -32,7 +32,7 @@
         <p onclick="window.location.href = 'lokalen.action'">
           <i class="fa fa-list-ol"></i> Lokalen
         </p>
-        <p>
+        <p onclick="window.location.href = `kalender.action`">
           <i class="fa fa-calendar-days"></i> Kalender
         </p>
       </div>

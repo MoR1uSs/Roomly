@@ -1,30 +1,15 @@
+import { disableButton } from "./utils.js";
+
 const form = document.querySelector(".reservation-form");
 const button = document.querySelector("#disabled-button");
 const requiredFields = form.querySelectorAll('input[required], select[required]');
 const p = document.querySelector("#error-text");
 
-const disableButton = (shouldDisable) => {
-    if (shouldDisable) {
-        p.style.color = "red";
-        p.style.weight = 600;
-        button.disabled = true;
-        button.style.background = "#cccccc";
-        button.style.opacity = 0.7;
-        button.style.cursor = "not-allowed";
-    } else {
-        button.disabled = false;
-        button.style.background = "var(--button-color)";
-        button.style.opacity = 1;
-        button.style.cursor = "pointer";
-    }
-}
-
-disableButton(true);
-
+disableButton(p, button, true)
 if(form && button && requiredFields){
     const checkRequiredFields = () => {
         p.textContent = "";
-        disableButton(true);
+        disableButton(p, button, true);
 
         let isValid = true;
         let today = new Date();
@@ -40,7 +25,10 @@ if(form && button && requiredFields){
             if(field.hasAttribute('data-date')){
                 selectedDate = new Date(field.value);
 
-                if(selectedDate < today){
+                const currentTime = new Date(today);
+                currentTime.setHours(0,0,0,0)
+
+                if (selectedDate < currentTime) {
                     isValid = false;
                     p.textContent = "Voer huidige date in";
                 }
@@ -64,15 +52,14 @@ if(form && button && requiredFields){
                 selectedEndTime = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), hours, minutes);
 
                 if(selectedBeginTime > selectedEndTime){
-                    p.textContent = "Voer huidige tijd in";g
+                    p.textContent = "Voer huidige tijd in";
                     isValid = false;
                 }
             }
-
         });
 
         if(isValid){
-            disableButton(false);
+            disableButton(p, button,false);
             return isValid;
         }
     }

@@ -5,9 +5,11 @@ import dao.ReservationDao;
 import dao.WorkspaceDao;
 import model.Reservation;
 import model.Workspace;
+import model.enums.Status;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +26,8 @@ public class WorkspaceLoadAction extends ActionSupport implements SessionAware {
         public String execute() {
             WorkspaceDao workspacesDao = new WorkspaceDao();
             workspaces = workspacesDao.getAllWorkspaces();
+
+            workspaces.forEach(workspace -> determineStatus(workspace.getId()));
 
             ReservationDao reservationDao = new ReservationDao();
             reservations = reservationDao.findAll();
@@ -45,6 +49,30 @@ public class WorkspaceLoadAction extends ActionSupport implements SessionAware {
 
         public void setWorkspaces(List<Workspace> workspaces) {
             this.workspaces = workspaces;
+        }
+
+        public void determineStatus(Long workspaceId){
+            LocalDate localDate = LocalDate.now();
+            LocalTime localTime = LocalTime.now();
+
+            WorkspaceDao workspaceDao = new WorkspaceDao();
+            ReservationDao reservationDao = new ReservationDao();
+
+            Workspace thisWorkspace = workspaceDao.getById(workspaceId);
+
+            if(thisWorkspace == null){
+                throw new RuntimeException("Workspace doesnt exist");
+            }
+
+            List<Reservation> activeReservations = reservationDao.findActiveReservations(workspaceId, localDate, localTime);
+
+            if(activeReservations.isEmpty()){
+                thisWorkspace.setStatus(Status.Vrij);
+            } else {
+                thisWorkspace.setStatus(Status.Bezet);
+            }
+
+            workspaceDao.update(thisWorkspace);
         }
 
         public boolean getCheckRole() {
