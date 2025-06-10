@@ -16,22 +16,30 @@ The goal of the project is to provide users with a simple and effective way to b
 
 ---
 
-## ⚙️ How to Run This App
+# ⚙️ How to Run This App
 
 > Make sure you have **Java 21**, **Tomcat**, and **MySQL** installed and configured.
 
-# 1. Clone this repository
-git clone https://github.com/MoR1uSs/Roomly.git
+## 1. Clone this repository
 
-# 2. Adjust hibernate.cfh.xml
+## 2. Adjust hibernate.cfh.xml
+Edit the `hibernate.cfg.xml` file:
+
+```xml
 <session-factory>
-      <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-      <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/yourdatabasename?useSSL=false</property>
-      <property name="hibernate.connection.username">username</property>
-      <property name="hibernate.connection.password">password</property>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/yourdatabasename?useSSL=false</property>
+    <property name="hibernate.connection.username">your_username</property>
+    <property name="hibernate.connection.password">your_password</property>
 </session-factory>
+```
 
-# 3. Run this project
-Run this app using Tomcat server
+## 3. Run this project
 
-# 4. Pray (Recommended)
+> Open the project in your IDE (e.g., IntelliJ IDEA or Eclipse)
+
+> Deploy it to Tomcat 9
+
+> Start the Tomcat server
+
+## 4. Pray (Recommended)
