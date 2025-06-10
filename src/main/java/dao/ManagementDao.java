@@ -1,14 +1,6 @@
 package dao;
 
-import antlr.preprocessor.Hierarchy;
-import model.Management;
-import org.apache.logging.log4j.core.appender.db.DbAppenderLoggingException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import util.HibernateUtil;
-
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class ManagementDao {
     private DaoManager<Management, Long> daoManager;

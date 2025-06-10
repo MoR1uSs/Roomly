@@ -1,12 +1,7 @@
 package dao;
 
-import com.sun.xml.bind.v2.model.core.ID;
-import model.Management;
 import model.enums.Role;
-import org.apache.logging.log4j.core.appender.db.DbAppenderLoggingException;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 import model.User;

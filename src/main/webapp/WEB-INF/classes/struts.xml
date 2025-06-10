@@ -39,7 +39,6 @@
             <result name="success">WEB-INF/admin/admindashboard.jsp</result>
         </action>
 
-        <!-- To handle  -->
         <action name="create-reservation" class="action.CreateReservationAction">
             <result name="success" type="redirectAction">load-reservations</result>
             <result name="input" type="redirectAction">lokalen</result>
