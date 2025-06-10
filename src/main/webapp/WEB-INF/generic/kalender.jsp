@@ -45,17 +45,6 @@
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
-      events: [
-        {
-          title: 'Reservation: test reservation',
-          start: '2025-06-10',
-          end: '2025-06-12'
-        },
-        {
-          title: 'Reservation: reservation',
-          start: '2025-06-15'
-        }
-      ]
     });
 
     calendar.render();
